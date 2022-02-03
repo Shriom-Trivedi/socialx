@@ -1,0 +1,6 @@
+.rightbar {
+    flex: 3.5;
+    background-color: darkorchid;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

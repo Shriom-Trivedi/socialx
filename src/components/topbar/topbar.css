@@ -86,11 +86,27 @@
   margin-right: 10px;
   cursor: pointer;
   padding: 5px;
+  position: relative;
   transition: 0.13s all ease-out;
+  border-radius: 50%;
 }
 
 .topbarIconItem:hover {
   background-color: rgb(228, 228, 228);
-  border-radius: 50%;
 }
 
+.topbarIconBadge {
+  width: 15px;
+  height: 15px;
+  background-color: #81c6ff;
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  overflow: visible;
+}

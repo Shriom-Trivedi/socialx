@@ -8,7 +8,7 @@ const Topbar = () => {
 
   const handleFocusIn = () => {
     searchRef.current.style.backgroundColor = "white";
-    searchRef.current.style.border = "0.5px solid #999696";
+    searchRef.current.style.border = "0.5px solid #81c6ff";
   };
 
   const handleFocusOut = () => {
