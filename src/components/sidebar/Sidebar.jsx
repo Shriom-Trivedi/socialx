@@ -77,6 +77,18 @@ const sidebar = () => {
             <img src="/assets/person/1.jpeg" alt="" className="sidebarFriendImg" />
             <span className="sidebarfriendName">Julia Beckman</span>
           </li>
+          <li className="sidebarFriend">
+            <img src="/assets/person/6.jpeg" alt="" className="sidebarFriendImg" />
+            <span className="sidebarfriendName">Benn Beckman</span>
+          </li>
+          <li className="sidebarFriend">
+            <img src="/assets/person/7.jpeg" alt="" className="sidebarFriendImg" />
+            <span className="sidebarfriendName">Fiona Markus</span>
+          </li>
+          <li className="sidebarFriend">
+            <img src="/assets/person/8.jpeg" alt="" className="sidebarFriendImg" />
+            <span className="sidebarfriendName">Nico Robin</span>
+          </li>
         </ul>
       </div>
     </div>
