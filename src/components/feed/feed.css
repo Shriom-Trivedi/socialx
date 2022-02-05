@@ -1,6 +1,9 @@
 .feed {
     flex: 6;
-    background-color: burlywood;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.feedContainer {
+    padding: 20px;
 }

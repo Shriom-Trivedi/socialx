@@ -1,5 +1,8 @@
 import "./topbar.css";
-import { Search, Person, Chat, Notifications } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { Badge, Tooltip } from "@mui/material";
 import { useRef } from "react";
 
@@ -40,22 +43,22 @@ const Topbar = () => {
         <div className='topbarIcons'>
           <div className='topbarIconItem'>
             <Tooltip title='Account' arrow>
-              <Badge badgeContent={4} color='primary'>
-                <Person />
+              <Badge badgeContent={2} color='primary'>
+                <PersonOutlineOutlinedIcon className='topbarIcon' />
               </Badge>
             </Tooltip>
           </div>
           <div className='topbarIconItem'>
             <Tooltip title='Messages' arrow>
               <Badge badgeContent={4} color='primary'>
-                <Chat />
+                <ChatOutlinedIcon className='topbarIcon' />
               </Badge>
             </Tooltip>
           </div>
           <div className='topbarIconItem'>
             <Tooltip title='Notifications' arrow>
               <Badge badgeContent={4} color='primary'>
-                <Notifications />
+                <NotificationsNoneOutlinedIcon className='topbarIcon' />
               </Badge>
             </Tooltip>
           </div>
