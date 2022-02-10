@@ -108,11 +108,11 @@
 }
 
 .likeCounterAnimation {
-  animation: likeCounterAnimation 0.2s;
+  animation: likeCounterAnimation 0.15s;
 }
 
 .unlikeCounterAnimation {
-  animation: unlikeCounterAnimation 0.2s;
+  animation: unlikeCounterAnimation 0.15s;
 }
 
 @keyframes likeCounterAnimation {
