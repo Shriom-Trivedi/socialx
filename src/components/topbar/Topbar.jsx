@@ -5,6 +5,7 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { Badge, Tooltip } from "@mui/material";
 import { useRef } from "react";
+import SearchResult from "../searchResult/SearchResult";
 
 const Topbar = () => {
   const searchRef = useRef();
@@ -33,6 +34,9 @@ const Topbar = () => {
             onFocus={handleFocusIn}
             onBlur={handleFocusOut}
           />
+        </div>
+        <div className='searchResult'>
+          <SearchResult />
         </div>
       </div>
       <div className='topbarRight'>
