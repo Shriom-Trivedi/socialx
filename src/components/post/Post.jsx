@@ -9,11 +9,25 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import { Users } from "../../dummyData";
 import "./post.css";
+import { useState } from "react";
 
 const Post = ({ post }) => {
   const { comment, date, desc, like, photo } = post;
   const user = Users.find((user) => user.id === post.userId);
   const { profilePicture, username } = user;
+
+  const [likes, setLikes] = useState(like);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLike = () => {
+    if (isLiked === false) {
+      setLikes(likes + 1);
+      setIsLiked(true);
+    } else {
+      setLikes(likes - 1);
+      setIsLiked(false);
+    }
+  };
   return (
     <div className='post'>
       <div className='postWrapper'>
@@ -35,10 +49,27 @@ const Post = ({ post }) => {
         </div>
         <div className='postBottom'>
           <div className='postBottomLeft'>
-            <Tooltip title='Like' arrow>
-              <div className='postBottomLeftIcons postBottomLike'>
-                <FavoriteBorderIcon className='postBottomLeftIcon like' />
-                <span className='postLikeCounter'>{like}</span>
+            <Tooltip title={`${isLiked === true ? "Unlike" : "Like"}`} arrow>
+              <div
+                className='postBottomLeftIcons postBottomLike'
+                onClick={handleLike}
+              >
+                {isLiked === true ? (
+                  <FavoriteIcon
+                    className='postBottomLeftIcon like'
+                    style={{ color: "red" }}
+                  />
+                ) : (
+                  <FavoriteBorderIcon className='postBottomLeftIcon like' />
+                )}
+
+                <span
+                  className={`postLikeCounter ${
+                    isLiked === true && "likedPostText likeCounterAnimation"
+                  } ${isLiked === false && "unlikeCounterAnimation"}`}
+                >
+                  {likes}
+                </span>
               </div>
             </Tooltip>
             <Tooltip title='Comment' arrow>

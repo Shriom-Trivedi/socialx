@@ -66,7 +66,8 @@
   align-items: center;
 }
 
-.postBottomLeftIcons, .postBottomRightIcons {
+.postBottomLeftIcons,
+.postBottomRightIcons {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -78,11 +79,15 @@
   margin-right: 8px;
 }
 
-.postBottomLike:hover, .like:hover, .postLikeCounter:hover {
+.postBottomLike:hover,
+.like:hover,
+.postLikeCounter:hover {
   color: #db6565;
 }
 
-.postBottomComment:hover, .comment:hover, .postCommentCounter:hover {
+.postBottomComment:hover,
+.comment:hover,
+.postCommentCounter:hover {
   color: #4c76a7;
 }
 
@@ -96,4 +101,34 @@
 
 .postBottomSave:hover {
   color: #77b98d;
+}
+
+.likedPostText {
+  color: red;
+}
+
+.likeCounterAnimation {
+  animation: likeCounterAnimation 0.2s;
+}
+
+.unlikeCounterAnimation {
+  animation: unlikeCounterAnimation 0.2s;
+}
+
+@keyframes likeCounterAnimation {
+  0% {
+    transform: translateY(2rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes unlikeCounterAnimation {
+  0% {
+    transform: translateY(-2rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
