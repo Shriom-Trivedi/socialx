@@ -132,3 +132,10 @@
     transform: translateY(0);
   }
 }
+
+
+@media screen and (max-width: 768px) {
+  .post {
+    width: 100%;
+  }
+}

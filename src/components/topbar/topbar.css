@@ -122,3 +122,18 @@
   font-size: 12px;
   overflow: visible;
 }
+
+@media screen and (max-width: 768px) {
+  .topbarLeft {
+    display: none;
+  }
+
+  .topbarCenter {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topbarRight {
+    display: none;
+  }
+}
