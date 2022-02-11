@@ -18,6 +18,7 @@ const Post = ({ post }) => {
 
   const [likes, setLikes] = useState(like);
   const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const handleLike = () => {
     if (isLiked === false) {
@@ -27,6 +28,10 @@ const Post = ({ post }) => {
       setLikes(likes - 1);
       setIsLiked(false);
     }
+  };
+
+  const handleSave = () => {
+    setIsSaved(!isSaved);
   };
   return (
     <div className='post'>
@@ -56,7 +61,7 @@ const Post = ({ post }) => {
               >
                 {isLiked === true ? (
                   <FavoriteIcon
-                    className='postBottomLeftIcon like'
+                    className='postBottomLeftIcon '
                     style={{ color: "#db6565" }}
                   />
                 ) : (
@@ -85,10 +90,25 @@ const Post = ({ post }) => {
             </Tooltip>
           </div>
           <div className='postBottomRight'>
-            <Tooltip title='Save' arrow>
-              <div className='postBottomRightIcons postBottomSave'>
-                <BookmarkBorderOutlinedIcon className='postBottomRightIcon' />
-              </div>
+            <Tooltip title={`${isSaved === true ? "Saved" : "Save"}`} arrow>
+              {isSaved === true ? (
+                <div
+                  className='postBottomRightIcons postBottomSave'
+                  onClick={handleSave}
+                >
+                  <BookmarkOutlinedIcon
+                    className='postBottomRightIcon'
+                    style={{ color: "#7bb990" }}
+                  />
+                </div>
+              ) : (
+                <div
+                  className='postBottomRightIcons postBottomSave'
+                  onClick={handleSave}
+                >
+                  <BookmarkBorderOutlinedIcon className='postBottomRightIcon' />
+                </div>
+              )}
             </Tooltip>
           </div>
         </div>
