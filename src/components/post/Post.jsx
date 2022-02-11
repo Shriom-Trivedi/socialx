@@ -57,7 +57,7 @@ const Post = ({ post }) => {
                 {isLiked === true ? (
                   <FavoriteIcon
                     className='postBottomLeftIcon like'
-                    style={{ color: "red" }}
+                    style={{ color: "#db6565" }}
                   />
                 ) : (
                   <FavoriteBorderIcon className='postBottomLeftIcon like' />
