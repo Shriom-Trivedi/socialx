@@ -14,16 +14,13 @@ const Topbar = () => {
   const handleFocusIn = () => {
     searchRef.current.style.backgroundColor = "white";
     searchRef.current.style.border = "0.5px solid #81c6ff";
+    setIsSearchActive(true);
   };
 
   const handleFocusOut = () => {
     searchRef.current.style.backgroundColor = "#e7e7e7";
     searchRef.current.style.border = "0.5px solid #fff";
     setIsSearchActive(false);
-  };
-
-  const handleClick = () => {
-    setIsSearchActive(true);
   };
 
   return (
@@ -39,7 +36,6 @@ const Topbar = () => {
             className='searchInput'
             onFocus={handleFocusIn}
             onBlur={handleFocusOut}
-            onClick={handleClick}
           />
         </div>
         {isSearchActive && (
