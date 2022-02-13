@@ -4,11 +4,12 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { Badge, Tooltip } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import SearchResult from "../searchResult/SearchResult";
 
 const Topbar = () => {
   const searchRef = useRef();
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   const handleFocusIn = () => {
     searchRef.current.style.backgroundColor = "white";
@@ -18,6 +19,11 @@ const Topbar = () => {
   const handleFocusOut = () => {
     searchRef.current.style.backgroundColor = "#e7e7e7";
     searchRef.current.style.border = "0.5px solid #fff";
+    setIsSearchActive(false);
+  };
+
+  const handleClick = () => {
+    setIsSearchActive(true);
   };
 
   return (
@@ -33,11 +39,14 @@ const Topbar = () => {
             className='searchInput'
             onFocus={handleFocusIn}
             onBlur={handleFocusOut}
+            onClick={handleClick}
           />
         </div>
-        <div className='searchResult'>
-          <SearchResult />
-        </div>
+        {isSearchActive && (
+          <div className='searchResult'>
+            <SearchResult />
+          </div>
+        )}
       </div>
       <div className='topbarRight'>
         <div className='topbarLinks'>

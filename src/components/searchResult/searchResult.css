@@ -1,0 +1,16 @@
+.searchResultContainer {
+  position: fixed;
+  background-color: #ffffff;
+  width: 37.5%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .searchResultContainer {
+    display: none;
+  }
+}

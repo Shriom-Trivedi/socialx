@@ -29,6 +29,8 @@
 
 .topbarCenter {
   flex: 5;
+  display: flex;
+  flex-direction: column;
 }
 
 .searchbar {
@@ -55,9 +57,14 @@
 .searchInput {
   border: none;
   width: 100%;
+  height: 100%;
   outline: none;
   margin-left: 5px;
   background-color: transparent;
+}
+
+.SearchResult {
+  position: relative;
 }
 
 .topbarRight {
@@ -131,6 +138,7 @@
   .topbarCenter {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .topbarRight {
