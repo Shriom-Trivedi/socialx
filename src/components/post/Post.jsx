@@ -21,13 +21,8 @@ const Post = ({ post }) => {
   const [isSaved, setIsSaved] = useState(false);
 
   const handleLike = () => {
-    if (isLiked === false) {
-      setLikes(likes + 1);
-      setIsLiked(true);
-    } else {
-      setLikes(likes - 1);
-      setIsLiked(false);
-    }
+    setLikes(isLiked ? likes - 1 : likes + 1);
+    setIsLiked(!isLiked);
   };
 
   const handleSave = () => {

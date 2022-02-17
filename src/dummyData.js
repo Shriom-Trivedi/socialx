@@ -58,7 +58,7 @@ export const Posts = [
     photo: "assets/post/1.jpeg",
     date: "5 mins ago",
     userId: 1,
-    like: 32,
+    like: 0,
     comment: 9,
   },
   {
@@ -122,7 +122,6 @@ export const Posts = [
   {
     id: 9,
     desc: "Change the world by being yourself.",
-    photo: "assets/post/9.jpeg",
     date: "5 days ago",
     userId: 9,
     like: 11,

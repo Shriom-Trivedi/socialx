@@ -2,6 +2,12 @@
   width: 90%;
   border-radius: 5px;
   margin: 20px 0;
+  cursor: pointer;
+  border: 0.5px solid rgb(231, 231, 231);
+  transition: all 0.2s ease-in-out;
+}
+
+.post:hover {
   background-color: rgb(240, 240, 240);
 }
 
@@ -132,7 +138,6 @@
     transform: translateY(0);
   }
 }
-
 
 @media screen and (max-width: 768px) {
   .post {
