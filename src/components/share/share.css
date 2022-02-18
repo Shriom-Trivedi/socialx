@@ -1,8 +1,8 @@
 .share {
   width: 90%;
   height: 170px;
-  border-radius: 8px;
-  background-color: #f1f3f5;
+  border-radius: 5px;
+  background-color: var(--gray-light);
 }
 
 .shareWrapper {
@@ -53,7 +53,7 @@
 
 .shareIcon,
 .shareButtonIcon {
-  color: #4ea9f3;
+  color: var(--blue);
   font-size: 28px !important;
 }
 

@@ -31,7 +31,7 @@
 }
 
 .sidebarListItem:hover {
-  background-color: rgb(233, 233, 233);
+  background-color: var(--gray-light);
 }
 
 .sidebarIcon {
@@ -42,8 +42,8 @@
   width: 85%;
   padding: 10px;
   border: none;
-  background-color: #81c6ff;
-  color: rgb(252, 252, 252);
+  background-color: var(--blue-light);
+  color: var(--text-light);
   border-radius: 3px;
   font-weight: 500;
   cursor: pointer;
@@ -75,7 +75,7 @@
 }
 
 .sidebarFriend:hover {
-  background-color: rgb(233, 233, 233);
+  background-color: var(--gray-light);
 }
 
 .sidebarFriendImg {

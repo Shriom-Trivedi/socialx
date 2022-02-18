@@ -1,6 +1,24 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+:root {
+  --primary-color: #fff;
+  --gray: #ececec;
+  --gray-light: #f5f5f5;
+  --blue-light: #81c6ff;
+  --blue: #4ea9f3;
+  --blue-dark: #4c76a7;
+  --green-dark: #77b98d;
+  --red-light: #db6565;
+  --white-border: #fff;
+  --text-light: #f6f6f6;
+  --text-gray: #969696;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0px 0px 3px rgba(0, 0, 0, 0.102);
+  --shadow-lg: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
