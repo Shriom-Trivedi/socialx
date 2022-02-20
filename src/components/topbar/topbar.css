@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik+Beastly&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
 
 /* Utility classes */
 .logo {
-  font-family: "Rubik Beastly", cursive;
-  font-size: 24px;
+  font-family: "Monoton", cursive;
+  font-size: 32px;
   margin-left: 40px;
   cursor: pointer;
   user-select: none;
