@@ -10,9 +10,7 @@ const Profile = () => {
     <>
       <Topbar />
       <div className='profileContainer'>
-        <Sidebar />
-        <Feed />
-        <Rightbar />
+
       </div>
     </>
   );
