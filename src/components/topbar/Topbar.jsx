@@ -46,8 +46,7 @@ const Topbar = () => {
       </div>
       <div className='topbarRight'>
         <div className='topbarLinks'>
-          <span className='topbarLink'>Home</span>
-          <span className='topbarLink'>Timeline</span>
+          {/* TODO: Light and Dark mode button to be added */}
         </div>
         <div className='topbarIcons'>
           <div className='topbarIconItem'>
