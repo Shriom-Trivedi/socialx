@@ -38,23 +38,6 @@
   margin: 0 15px;
 }
 
-.sidebarButton {
-  width: 85%;
-  padding: 10px;
-  border: none;
-  background-color: var(--blue-light);
-  color: var(--text-light);
-  border-radius: 3px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-left: 15px;
-  margin-top: 15px;
-}
-
-.sidebarButton:hover {
-  opacity: 0.8;
-}
-
 .sidebarHr {
   margin: 20px 0;
 }

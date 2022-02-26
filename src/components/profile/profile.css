@@ -1,3 +1,132 @@
 .profileContainer {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+}
+
+.profileTop {
+  flex: 9;
+}
+
+.profileCover {
+  height: 280px;
+  position: relative;
+}
+
+.profileCoverImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileCenterWrapper {
+  width: 100%;
+  margin: auto;
+  padding: 16px 20px;
+  max-width: 700px;
+}
+
+.profileCenterTop {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.profileUserFollow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 2;
+}
+
+.profileUser {
+  display: flex;
+  align-items: center;
+}
+
+.followLists {
+  display: flex;
+  justify-content: space-evenly;
+  flex: 1;
+  color: var(--text-gray);
+}
+
+.messageBtn,
+.followBtn {
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  margin-right: 15px;
+}
+
+.messageBtn:hover,
+.followBtn:hover {
+  opacity: 0.8;
+}
+
+.followBtn {
+  background-color: var(--blue);
+  color: var(--text-light);
+}
+
+.messageBtn {
+  color: var(--text-gray);
+  background-color: var(--gray);
+}
+
+.profileUserImg {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  margin-top: -108px;
+  z-index: 1;
+}
+
+/* profile center bottom */
+.profileName {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.verify {
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
+}
+
+.profileUserInfo {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-gray);
+}
+
+.username {
+  margin-right: 10px;
+}
+
+.location,
+.joinDate {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.profileBio {
+  margin: 16px 0;
+  color: #202021;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .followLists {
+    display: none;
+  }
 }
