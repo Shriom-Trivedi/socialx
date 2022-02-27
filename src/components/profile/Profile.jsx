@@ -1,5 +1,6 @@
 import React from "react";
 import Topbar from "../topbar/Topbar";
+import TabPanel from "../TabPanel/TabPanel";
 import { MoreVert } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
@@ -30,7 +31,7 @@ const Profile = () => {
               <div className='profileUserFollow'>
                 <div className='followLists'>
                   <p className='followers'>290 followers</p>
-                  <p className='followers'>263 followings</p>
+                  <p className='followings'>263 followings</p>
                 </div>
                 <button className='messageBtn'>Message</button>
                 <button className='followBtn'>Follow</button>
@@ -44,7 +45,9 @@ const Profile = () => {
             <div className='profileCenterBottom'>
               <div className='profileName'>
                 <p className='profileUserName'>Shri Om Trivedi</p>
-                <img src='assets/verify.png' alt='' className='verify' />
+                <Tooltip title='Verified' placement='top'>
+                  <img src='assets/verify.png' alt='' className='verify' />
+                </Tooltip>
               </div>
               <div className='profileUserInfo'>
                 <p className='username'>@shriomatic</p>
@@ -74,12 +77,18 @@ const Profile = () => {
                   Trained Developer. Untrained Investor. Coming Enterpreneur
                 </p>
               </div>
+              <div className='mobile--followLists'>
+                <p className='mobile--followers'>290 followers</p>
+                <p className='mobile--followings'>263 followings</p>
+              </div>
             </div>
           </div>
         </div>
 
         <div className='profileBottom'>
-          
+          <div className='profileBottomWrapper'>
+            <TabPanel />
+          </div>
         </div>
       </div>
     </>

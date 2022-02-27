@@ -98,6 +98,7 @@
   width: 24px;
   height: 24px;
   margin-left: 4px;
+  margin-top: -3px;
 }
 
 .profileUserInfo {
@@ -125,8 +126,35 @@
   line-height: 20px;
 }
 
+.mobile--followLists {
+  display: none;
+}
+
+/* profile bottom */
+.profileBottom {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+}
+
+.profileBottomWrapper {
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width: 768px) {
   .followLists {
     display: none;
+  }
+
+  .mobile--followLists {
+    display: flex;
+    color: var(--text-gray);
+    font-size: 13px;
+  }
+
+  .mobile--followers,
+  .mobile--followings {
+    margin-right: 10px;
   }
 }
