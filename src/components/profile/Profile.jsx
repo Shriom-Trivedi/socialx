@@ -74,7 +74,7 @@ const Profile = () => {
               </div>
               <div className='profileBio'>
                 <p className='bio'>
-                  Trained Developer. Untrained Investor. Coming Enterpreneur
+                  Trained Developer. Untrained Investor. Upcoming Enterpreneur.
                 </p>
               </div>
               <div className='mobile--followLists'>

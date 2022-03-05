@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Posts } from "../../dummyData";
 import Post from "../post/Post";
+import Share from "../share/Share";
+import About from "../About/About";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,25 +57,49 @@ export default function BasicTabs() {
           onChange={handleChange}
           aria-label='basic tabs example'
         >
-          <Tab label='About' {...a11yProps(0)} />
+          <Tab label='Shri Om Trivedi' {...a11yProps(0)} />
           <Tab label='Post' {...a11yProps(1)} />
-          <Tab label='Three' {...a11yProps(2)} />
-          <Tab label='Four' {...a11yProps(3)} />
+          <Tab label='Coming Soon...' {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        About
+        <About
+          label='About'
+          tooltip='Edit About'
+          title='Share something about yourself'
+          desc='Use Markdown to share more about who you are with the world on SOCIALX'
+          buttonText='Add About'
+        />
+        <About
+          label='Interests'
+          tooltip='Edit Interests'
+          title='Share what interests you'
+          desc='Use Markdown to share more of your interests with the world and let then know who you are.'
+          buttonText='Add Interests'
+        />
+        <About
+          label='Details'
+          tooltip='Edit Details'
+          title='Share your basic details with the world'
+          desc='Use Markdown to share more of your details with the world like birthday, relationship status and much more.'
+          buttonText='Add Details'
+        />
+        <About
+          label='Positions'
+          tooltip='Edit Positions'
+          title='Share a timeline of your positions'
+          desc={`Add your professional history so others know you've put your skills to good use.`}
+          buttonText='Add Positions'
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
+        <Share />
         {Posts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
+        This area is under construction...
       </TabPanel>
     </Box>
   );
