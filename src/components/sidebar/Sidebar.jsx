@@ -54,7 +54,7 @@ const sidebar = () => {
             <span className='sidebarListItemText'>Courses</span>
           </li>
         </ul>
-        <button className="sidebarButton">Show More</button>
+        <button className="btn-primary">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
           <li className="sidebarFriend">

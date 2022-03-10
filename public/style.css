@@ -9,7 +9,8 @@
   --red-light: #db6565;
   --white-border: #fff;
   --text-light: #f6f6f6;
-  --text-gray: #969696;
+  --text-gray: #999999;
+  --text-dark: #666666;
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0px 0px 3px rgba(0, 0, 0, 0.102);
@@ -21,4 +22,38 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+}
+
+.btn-primary {
+  width: 85%;
+  padding: 10px;
+  border: none;
+  background-color: var(--blue-light);
+  color: var(--text-light);
+  border-radius: 3px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  width: 85%;
+  padding: 10px;
+  border: none;
+  background-color: var(--gray);
+  color: var(--text-gray);
+  border-radius: 3px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.btn-secondary:hover {
+  opacity: 0.8;
 }

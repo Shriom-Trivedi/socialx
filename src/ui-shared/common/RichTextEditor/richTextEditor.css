@@ -1,0 +1,9 @@
+.editorClassName {
+  margin-top: 10px;
+  padding: 10px 15px;
+  box-shadow: var(--shadow-lg);
+}
+
+.wrapperClassName {
+  padding: 10px;
+}

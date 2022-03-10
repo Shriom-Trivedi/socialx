@@ -1,0 +1,63 @@
+.aboutContainer {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.aboutWrapper {
+  padding: 16px 20px;
+  position: relative;
+  background-color: var(--gray-light);
+}
+
+.aboutTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aboutTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray-dark);
+}
+
+.aboutEditIcon {
+  cursor: pointer;
+}
+
+.aboutBottom {
+  padding: 40px 16px;
+  text-align: center;
+}
+
+.addAbout {
+  max-width: 480px;
+  margin: auto;
+}
+
+.addAboutItemsTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray-dark);
+  margin-bottom: 12px;
+}
+
+.addAboutItemsDesc {
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.addAboutBtn {
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background-color: var(--blue);
+  color: var(--text-light);
+}
+
+.addAboutBtn:hover {
+  opacity: 0.8;
+}
