@@ -24,7 +24,7 @@ export default function AlertDialog({
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
-        <div>{children}</div>
+        <div style={{ padding: "20px" }}>{children}</div>
         <DialogActions>
           <Button onClick={handleClose} color='error'>
             Cancel

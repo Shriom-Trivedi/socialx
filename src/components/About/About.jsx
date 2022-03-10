@@ -3,12 +3,17 @@ import EditIcon from "@mui/icons-material/Edit";
 import "./about.css";
 import { Tooltip } from "@mui/material";
 import AlertDialog from "../../ui-shared/common/Dialog";
+import Share from "../share/Share";
+import RichTextEditor from "../../ui-shared/common/RichTextEditor/RichTextEditor";
+import AddAboutDialog from "../ProfileDialogs/AddAboutDialog/AddAboutDialog";
 
 const About = ({ label, tooltip, title, desc, buttonText }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isAddAboutDialogOpen, setAddAboutIsDialogOpen] = useState(false);
 
   const handleClickOpen = () => {
-    setIsDialogOpen(true);
+    if (label === "About") {
+      setAddAboutIsDialogOpen(true);
+    }
   };
   return (
     <div className='aboutContainer'>
@@ -37,10 +42,12 @@ const About = ({ label, tooltip, title, desc, buttonText }) => {
           </div>
         </div>
       </div>
-      <AlertDialog
-        isDialogOpen={isDialogOpen}
-        setIsDialogOpen={setIsDialogOpen}
-      ></AlertDialog>
+      {isAddAboutDialogOpen && (
+        <AddAboutDialog
+          isAddAboutDialogOpen={isAddAboutDialogOpen}
+          setAddAboutIsDialogOpen={setAddAboutIsDialogOpen}
+        />
+      )}
     </div>
   );
 };
