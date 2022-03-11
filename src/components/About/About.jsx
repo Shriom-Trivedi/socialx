@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import "./about.css";
 import { Tooltip } from "@mui/material";
-import AlertDialog from "../../ui-shared/common/Dialog";
+import AlertDialog from "../../ui-shared/common/DialogBox";
 import Share from "../share/Share";
 import RichTextEditor from "../../ui-shared/common/RichTextEditor/RichTextEditor";
 import AddAboutDialog from "../ProfileDialogs/AddAboutDialog/AddAboutDialog";
 
-const About = ({ label, tooltip, title, desc, buttonText }) => {
+const About = ({ label, tooltip, title, desc, buttonText, type }) => {
   const [isAddAboutDialogOpen, setAddAboutIsDialogOpen] = useState(false);
 
   const handleClickOpen = () => {
-    if (label === "About") {
+    // types are "about", "interests", "position", "details"
+    if (type === "about") {
       setAddAboutIsDialogOpen(true);
     }
   };

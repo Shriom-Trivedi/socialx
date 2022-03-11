@@ -69,6 +69,7 @@ export default function BasicTabs() {
           title='Share something about yourself'
           desc='Use Markdown to share more about who you are with the world on SOCIALX'
           buttonText='Add About'
+          type='about'
         />
         <About
           label='Interests'
@@ -76,6 +77,7 @@ export default function BasicTabs() {
           title='Share what interests you'
           desc='Use Markdown to share more of your interests with the world and let then know who you are.'
           buttonText='Add Interests'
+          type='interests'
         />
         <About
           label='Details'
@@ -83,6 +85,7 @@ export default function BasicTabs() {
           title='Share your basic details with the world'
           desc='Use Markdown to share more of your details with the world like birthday, relationship status and much more.'
           buttonText='Add Details'
+          type='details'
         />
         <About
           label='Positions'
@@ -90,6 +93,7 @@ export default function BasicTabs() {
           title='Share a timeline of your positions'
           desc={`Add your professional history so others know you've put your skills to good use.`}
           buttonText='Add Positions'
+          type='positions'
         />
       </TabPanel>
       <TabPanel value={value} index={1}>

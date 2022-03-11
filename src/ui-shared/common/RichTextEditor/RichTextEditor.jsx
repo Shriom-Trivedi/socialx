@@ -10,7 +10,6 @@ const RichTextEditor = () => {
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState);
   };
-  console.log(editorState);
   return (
     <Editor
       editorState={editorState}

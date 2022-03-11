@@ -1,15 +1,15 @@
 import React from "react";
-import AlertDialog from "../../../ui-shared/common/Dialog";
+import DialogBox from "../../../ui-shared/common/DialogBox";
 import RichTextEditor from "../../../ui-shared/common/RichTextEditor/RichTextEditor";
 
 const AddAboutDialog = ({ isAddAboutDialogOpen, setAddAboutIsDialogOpen }) => {
   return (
-    <AlertDialog
+    <DialogBox
       isDialogOpen={isAddAboutDialogOpen}
       setIsDialogOpen={setAddAboutIsDialogOpen}
     >
       <RichTextEditor />
-    </AlertDialog>
+    </DialogBox>
   );
 };
 
