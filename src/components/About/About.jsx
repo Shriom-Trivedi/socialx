@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import "./about.css";
 import { Tooltip } from "@mui/material";
-import AlertDialog from "../../ui-shared/common/DialogBox";
-import Share from "../share/Share";
-import RichTextEditor from "../../ui-shared/common/RichTextEditor/RichTextEditor";
 import AddAboutDialog from "../ProfileDialogs/AddAboutDialog/AddAboutDialog";
+import AddInterestsDialog from "../ProfileDialogs/AddInterestsDialog/AddInterestsDialog.tsx";
 
 const About = ({ label, tooltip, title, desc, buttonText, type }) => {
-  const [isAddAboutDialogOpen, setAddAboutIsDialogOpen] = useState(false);
+  const [isAddAboutDialogOpen, setIsAddAboutIsDialogOpen] = useState(false);
+  const [isAddInterestsDialogOpen, setIsAddInterestsDialogOpen] =
+    useState(false);
 
   const handleClickOpen = () => {
     // types are "about", "interests", "position", "details"
     if (type === "about") {
-      setAddAboutIsDialogOpen(true);
+      setIsAddAboutIsDialogOpen(true);
+    } else if (type === "interests") {
+      setIsAddInterestsDialogOpen(true);
     }
   };
   return (
@@ -46,7 +48,14 @@ const About = ({ label, tooltip, title, desc, buttonText, type }) => {
       {isAddAboutDialogOpen && (
         <AddAboutDialog
           isAddAboutDialogOpen={isAddAboutDialogOpen}
-          setAddAboutIsDialogOpen={setAddAboutIsDialogOpen}
+          setIsAddAboutIsDialogOpen={setIsAddAboutIsDialogOpen}
+        />
+      )}
+
+      {isAddInterestsDialogOpen && (
+        <AddInterestsDialog
+          isAddInterestsDialogOpen={isAddInterestsDialogOpen}
+          setIsAddInterestsDialogOpen={setIsAddInterestsDialogOpen}
         />
       )}
     </div>

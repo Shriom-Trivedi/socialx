@@ -1,4 +1,4 @@
-import Profile from "./components/profile/Profile";
+import Profile from "./pages/profile/Profile";
 import Home from "./pages/home/Home";
 
 function App() {

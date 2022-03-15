@@ -1,6 +1,6 @@
 import React from "react";
-import Topbar from "../topbar/Topbar";
-import TabPanel from "../TabPanel/TabPanel";
+import Topbar from "../../components/topbar/Topbar";
+import TabPanel from "../../components/TabPanel/TabPanel";
 import { MoreVert } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
