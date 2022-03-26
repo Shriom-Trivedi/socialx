@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+.loginContainer {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #fafafa;
+}
+
+.loginContainerLeft {
+  flex: 5;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3e9f3;
+  border-radius: 0 50% 50% 0;
+}
+
+.loginIllustration {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.loginContainerRight {
+  flex: 4;
+  height: 100%;
+  width: 100%;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContainerRightWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin-top: 120px;
+}
+
+.loginForm {
+  width: 100%;
+  height: 75%;
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginFormControl {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginTitle span {
+  font-size: 36px;
+  font-family: var(--logo-font);
+  color: #ff309f;
+}
+
+.loginHeading {
+  color: var(--text-gray);
+  letter-spacing: 0.12rem;
+  word-spacing: 0.16rem;
+  font-size: 20px;
+  margin-top: 80px;
+}
+
+.loginHeading p {
+  font-family: "Pacifico", cursive;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+  width: 70%;
+}
+
+.loginLabel {
+  color: var(--text-gray);
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.loginInput {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #c9c8c8;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 0 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.loginBtn {
+  width: 66%;
+  height: 40px;
+  border: none;
+  background-color: #8032ff;
+  color: var(--text-light);
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  opacity: 0.8;
+}
+
+.forgotPassword {
+  color: #1a1a1a;
+  font-size: 13px;
+  margin-top: 8px;
+  margin-left: auto;
+  color: #ff309f;
+  cursor: pointer;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+.rememberMe {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.rememberMeCheckbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.rememberMe label {
+  color: #1a1a1a;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.createAccount {
+  color: #1a1a1a;
+  font-size: 13px;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.createAccountLink {
+  cursor: pointer;
+  color: #ff309f;
+  margin-left: 5px;
+}
+
+.createAccountLink:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 912px) {
+  .loginContainer {
+    overflow: scroll;
+    flex-direction: column-reverse;
+  }
+  .loginContainerLeft {
+    width: 100%;
+    display: none;
+  }
+
+  .loginContainerRight {
+    height: 100%;
+  }
+
+  .loginContainerRightWrapper {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .formGroup {
+    width: 100%;
+  }
+
+  .loginBtn {
+    width: 90%;
+    height: 40px;
+  }
+
+  .loginHeading {
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+
+  .rememberMe {
+    width: 100%;
+  }
+}

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+
 :root {
   --primary-color: #fff;
   --gray: #ececec;
@@ -11,6 +13,7 @@
   --text-light: #f6f6f6;
   --text-gray: #999999;
   --text-dark: #666666;
+  --logo-font: "Monoton", cursive;
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0px 0px 3px rgba(0, 0, 0, 0.102);

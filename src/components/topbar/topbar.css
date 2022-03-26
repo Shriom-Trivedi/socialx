@@ -2,7 +2,7 @@
 
 /* Utility classes */
 .logo {
-  font-family: "Monoton", cursive;
+  font-family: var(--logo-font);
   font-size: 32px;
   margin-left: 40px;
   cursor: pointer;
