@@ -1,5 +1,6 @@
 import React from "react";
 import "./login.css";
+import { TextInput } from "../../ui-shared/FormControl/Form/FormControl";
 
 const Login = () => {
   return (
@@ -21,31 +22,20 @@ const Login = () => {
               <p>Welcome to Social Experience</p>
             </div>
             <div className='loginFormControl'>
-              <div className='formGroup'>
-                <label htmlFor='email' className='loginLabel'>
-                  Email or Username
-                </label>
-                <input
-                  type='text'
-                  name='email'
-                  id='email'
-                  className='loginInput'
-                  placeholder='Enter your email or username'
-                />
-              </div>
-              <div className='formGroup'>
-                <label htmlFor='password' className='loginLabel'>
-                  Password
-                </label>
-                <input
-                  type='password'
-                  name='password'
-                  id='password'
-                  className='loginInput'
-                  placeholder='Enter your password'
-                />
-                <span className='forgotPassword'>Forgot Password?</span>
-              </div>
+              <TextInput
+                label='Email or Username'
+                placeholder='Email or Username'
+                type='text'
+                name='email'
+                id='email'
+              />
+              <TextInput
+                label='Password'
+                placeholder='Enter your password'
+                type='password'
+                name='password'
+                id='password'
+              />
               <div className='rememberMe'>
                 <input
                   type='checkbox'
@@ -53,7 +43,7 @@ const Login = () => {
                   id='rememberMe'
                   className='rememberMeCheckbox'
                 />
-                <label htmlFor="rememberMe">Remember Me</label>
+                <label htmlFor='rememberMe'>Remember Me</label>
               </div>
             </div>
             <button className='loginBtn'>Sign In</button>

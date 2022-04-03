@@ -6,7 +6,6 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #fafafa;
 }
 
 .loginContainerLeft {
@@ -22,7 +21,7 @@
 .loginIllustration {
   width: 70%;
   height: 70%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .loginContainerRight {
