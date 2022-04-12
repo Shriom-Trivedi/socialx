@@ -9,7 +9,7 @@ export const TextInput = ({
   w = "100%",
 }) => {
   return (
-    <div className='formGroup'>
+    <div className='formGroup' style={{ width: w }}>
       <label htmlFor='email' className='loginLabel'>
         {label}
       </label>
@@ -19,7 +19,6 @@ export const TextInput = ({
         id={id}
         className='loginInput'
         placeholder={placeholder}
-        style={{ width: w }}
       />
     </div>
   );

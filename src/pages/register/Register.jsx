@@ -23,7 +23,7 @@ const Register = () => {
                   type='text'
                   id='name'
                   name='name'
-                  w='85%'
+                  w='80%'
                 />
                 <TextInput
                   label='Username'
@@ -31,7 +31,7 @@ const Register = () => {
                   type='text'
                   id='username'
                   name='username'
-                  w='85%'
+                  w='80%'
                 />
               </div>
               <div className='registerFormField'>
@@ -41,7 +41,7 @@ const Register = () => {
                   type='text'
                   id='country'
                   name='country'
-                  w='85%'
+                  w='80%'
                 />
                 <TextInput
                   label='Email'
@@ -49,7 +49,7 @@ const Register = () => {
                   type='email'
                   id='email'
                   name='email'
-                  w='85%'
+                  w='80%'
                 />
               </div>
               <div className='registerFormField'>
@@ -59,7 +59,7 @@ const Register = () => {
                   type='password'
                   id='password'
                   name='password'
-                  w='85%'
+                  w='80%'
                 />
                 <TextInput
                   label='Confirm Password'
@@ -67,7 +67,7 @@ const Register = () => {
                   type='password'
                   id='confirmPassword'
                   name='confirmPassword'
-                  w='85%'
+                  w='80%'
                 />
               </div>
             </div>
@@ -90,7 +90,7 @@ const Register = () => {
             </div>
             <div className='loginLinkContainer'>
               <span className='loginLinkItem'>Already have an account?</span>
-              <span className='loginLinkItem loginLink'>Log in</span>
+              <span className='loginLinkItem loginLink'>Login</span>
             </div>
           </div>
         </div>

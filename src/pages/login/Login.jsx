@@ -6,11 +6,19 @@ const Login = () => {
   return (
     <div className='loginContainer'>
       <div className='loginContainerLeft'>
-        <img
-          src='assets/illustrations/login/login_illustration.png'
-          alt='login'
-          className='loginIllustration'
-        />
+        <div className='loginHeadingContainer'>
+          <p className='loginLeftHeading'>
+            Welcome back to <span>SOCIALX</span>
+          </p>
+          <p className='loginLeftDesc'>we surely missed you</p>
+        </div>
+        <div className='imgContainer'>
+          <img
+            src='assets/illustrations/login/login_illustration.png'
+            alt='login'
+            className='loginIllustration'
+          />
+        </div>
       </div>
       <div className='loginContainerRight'>
         <div className='loginContainerRightWrapper'>
@@ -28,6 +36,7 @@ const Login = () => {
                 type='text'
                 name='email'
                 id='email'
+                w='60%'
               />
               <TextInput
                 label='Password'
@@ -35,7 +44,11 @@ const Login = () => {
                 type='password'
                 name='password'
                 id='password'
+                w='60%'
               />
+              <div className='forgotPassword'>
+                <p>Forgot Password?</p>
+              </div>
               <div className='rememberMe'>
                 <input
                   type='checkbox'
@@ -46,7 +59,9 @@ const Login = () => {
                 <label htmlFor='rememberMe'>Remember Me</label>
               </div>
             </div>
-            <button className='loginBtn'>Sign In</button>
+            <div className='signInBtn'>
+              <button className='loginBtn'>Sign In</button>
+            </div>
             <div className='createAccount'>
               <span>New to SOCIALX?</span>
               <span className='createAccountLink'>Create Account</span>

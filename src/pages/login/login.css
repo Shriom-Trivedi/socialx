@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
 
 .loginContainer {
   overflow: hidden;
@@ -9,23 +10,65 @@
 }
 
 .loginContainerLeft {
-  flex: 5;
+  flex: 4;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ff305c;
+}
+
+.loginHeadingContainer {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginLeftHeading {
+  font-family: "Paytone One", sans-serif ;
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 20px;
+  color: #f0f0f0;
+}
+
+.loginLeftHeading span {
+  font-family: "paytone one", sans-serif;
+  font-size: 32px;
+  color: #ab32ff;
+  text-shadow: -1.5px 3px #e9e9e9;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.loginLeftDesc {
+  font-family: "pacifico", sans-serif;
+  color: #f0f0f0;
+  letter-spacing: 0.12rem;
+  word-spacing: 0.16rem;
+  font-size: 15px;
+}
+
+.imgContainer {
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f3e9f3;
-  border-radius: 0 50% 50% 0;
 }
 
 .loginIllustration {
-  width: 70%;
-  height: 70%;
+  width: 85%;
+  height: 85%;
   object-fit: contain;
 }
 
 .loginContainerRight {
-  flex: 4;
+  flex: 5;
   height: 100%;
   width: 100%;
   background-color: #fafafa;
@@ -58,13 +101,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .loginTitle span {
+  font-family: "Paytone One", sans-serif !important;
+  color: var(--text-gray);
+  font-weight: 700;
   font-size: 36px;
-  font-family: var(--logo-font);
-  color: #ff309f;
 }
 
 .loginHeading {
@@ -103,11 +146,20 @@
   outline: none;
 }
 
+.signInBtn {
+  width: 100%;
+  height: 40px;
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .loginBtn {
-  width: 66%;
+  width: 60%;
   height: 40px;
   border: none;
-  background-color: #8032ff;
+  background-color: #ab32ff;
   color: var(--text-light);
   font-size: 14px;
   border-radius: 5px;
@@ -119,20 +171,28 @@
 }
 
 .forgotPassword {
-  color: #1a1a1a;
+  width: 100%;
   font-size: 13px;
-  margin-top: 8px;
+  margin-top: 0px;
   margin-left: auto;
-  color: #ff309f;
+  color: #ab32ff;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .forgotPassword:hover {
   text-decoration: underline;
 }
 
+.forgotPassword p {
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .rememberMe {
-  width: 70%;
+  width: 60%;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -161,7 +221,7 @@
 
 .createAccountLink {
   cursor: pointer;
-  color: #ff309f;
+  color: #ab32ff;
   margin-left: 5px;
 }
 
@@ -193,6 +253,10 @@
     width: 100%;
   }
 
+  .signInBtn {
+    margin-right: 0;
+  }
+
   .loginBtn {
     width: 90%;
     height: 40px;
@@ -205,6 +269,10 @@
   }
 
   .rememberMe {
+    width: 100%;
+  }
+
+  .forgotPassword p {
     width: 100%;
   }
 }
