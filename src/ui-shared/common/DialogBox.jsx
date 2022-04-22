@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 
-export default function AlertDialog({
+export default function DialogBox({
   isDialogOpen,
   setIsDialogOpen,
   children,

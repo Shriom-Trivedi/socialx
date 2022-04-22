@@ -1,6 +1,6 @@
 import React from "react";
-import Topbar from "../topbar/Topbar";
-import TabPanel from "../TabPanel/TabPanel";
+import Topbar from "../../components/topbar/Topbar";
+import TabPanel from "../../components/TabPanel/TabPanel";
 import { MoreVert } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
@@ -14,7 +14,7 @@ const Profile = () => {
       <div className='profileContainer'>
         <div className='profileTop'>
           <div className='profileCover'>
-            <img src='assets/post/3.jpeg' alt='' className='profileCoverImg' />
+            <img src='/assets/post/3.jpeg' alt='' className='profileCoverImg' />
           </div>
         </div>
 
@@ -23,7 +23,7 @@ const Profile = () => {
             <div className='profileCenterTop'>
               <div className='profileUser'>
                 <img
-                  src='assets/person/1.jpeg'
+                  src='/assets/person/1.jpeg'
                   alt=''
                   className='profileUserImg'
                 />
@@ -46,7 +46,7 @@ const Profile = () => {
               <div className='profileName'>
                 <p className='profileUserName'>Shri Om Trivedi</p>
                 <Tooltip title='Verified' placement='top'>
-                  <img src='assets/verify.png' alt='' className='verify' />
+                  <img src='/assets/verify.png' alt='' className='verify' />
                 </Tooltip>
               </div>
               <div className='profileUserInfo'>

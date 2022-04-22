@@ -6,10 +6,12 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import { Badge, Tooltip } from "@mui/material";
 import { useRef, useState } from "react";
 import SearchResult from "../searchResult/SearchResult";
+import { useNavigate } from "react-router-dom";
 
 const Topbar = () => {
   const searchRef = useRef();
   const [isSearchActive, setIsSearchActive] = useState(false);
+  let navigate = useNavigate();
 
   const handleFocusIn = () => {
     searchRef.current.style.backgroundColor = "white";
@@ -26,7 +28,9 @@ const Topbar = () => {
   return (
     <div className='topbarContainer'>
       <div className='topbarLeft'>
-        <span className='logo'>SOCIALX</span>
+        <span className='logo' onClick={() => navigate("/")}>
+          SOCIALX
+        </span>
       </div>
       <div className='topbarCenter'>
         <div className='searchbar' ref={searchRef}>

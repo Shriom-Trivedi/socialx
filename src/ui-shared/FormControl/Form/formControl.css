@@ -1,0 +1,29 @@
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+  width: 70%;
+  margin-right: 20px;
+}
+
+.loginLabel {
+  color: var(--text-gray);
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.loginInput {
+  height: 40px;
+  border: 1px solid #c9c8c8;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 0 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+@media screen and (max-width: 912px) {
+  .formGroup {
+    width: 100%;
+  }
+}

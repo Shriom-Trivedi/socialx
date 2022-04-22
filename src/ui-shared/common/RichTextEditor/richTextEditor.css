@@ -2,8 +2,15 @@
   margin-top: 10px;
   padding: 10px 15px;
   box-shadow: var(--shadow-lg);
+  min-height: 320px;
 }
 
 .wrapperClassName {
   padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .editorClassName {
+    min-height: 200px;
+  }
 }
