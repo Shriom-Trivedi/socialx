@@ -16,6 +16,9 @@ const Post = ({ post }) => {
   const user = Users.find((user) => user.id === post.userId);
   const { profilePicture, username } = user;
 
+  // public folder for images added here.
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const [likes, setLikes] = useState(like);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
