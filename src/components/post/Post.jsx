@@ -10,21 +10,29 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import { Users } from "../../dummyData";
 import "./post.css";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { format } from "timeago.js";
 
 const Post = ({ post }) => {
-  const { comment, date, desc, like, photo } = post;
+  const { comment, createdAt, desc, likes, photo } = post;
   const user = Users.find((user) => user.id === post.userId);
-  const { profilePicture, username } = user;
+
+  const userQuery = useQuery("user-data", async () => {
+    const userData = await axios.get(`users/${post.userId}`);
+    return userData.data;
+  });
+  const { isLoading, isError, data } = userQuery;
 
   // public folder for images added here.
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const [likes, setLikes] = useState(like);
+  const [noOfLikes, setLikes] = useState(likes[0]);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
   const handleLike = () => {
-    setLikes(isLiked ? likes - 1 : likes + 1);
+    setLikes(isLiked ? noOfLikes - 1 : noOfLikes + 1);
     setIsLiked(!isLiked);
   };
 
@@ -36,9 +44,13 @@ const Post = ({ post }) => {
       <div className='postWrapper'>
         <div className='postTop'>
           <div className='postTopLeft'>
-            <img src={profilePicture} alt='' className='postProfileImg' />
-            <span className='postUsername'>{username}</span>
-            <span className='postDate'>{date}</span>
+            <img
+              src={data?.profilePicture || `/assets/person/no-profilepic.png`}
+              alt=''
+              className='postProfileImg'
+            />
+            <span className='postUsername'>{data?.username}</span>
+            <span className='postDate'>{format(createdAt)}</span>
           </div>
           <Tooltip title='More' arrow>
             <div className='postTopRight'>
@@ -71,7 +83,7 @@ const Post = ({ post }) => {
                     isLiked === true && "likedPostText likeCounterAnimation"
                   } ${isLiked === false && "unlikeCounterAnimation"}`}
                 >
-                  {likes}
+                  {noOfLikes}
                 </span>
               </div>
             </Tooltip>
