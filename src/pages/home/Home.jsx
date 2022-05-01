@@ -12,7 +12,7 @@ const Home = () => {
       <Topbar />
       <div className='homeContainer'>
         <Sidebar />
-        <Feed />
+        <Feed username='shriom1'/>
         <RightBar />
       </div>
     </QueryClientProvider>

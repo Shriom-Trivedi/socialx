@@ -8,10 +8,12 @@ import { Posts } from "../../dummyData";
 import Post from "../post/Post";
 import Share from "../share/Share";
 import About from "../About/About";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import axios from "axios";
+import Feed from "../feed/Feed";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role='tabpanel'
@@ -42,7 +44,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({ username }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -97,10 +99,11 @@ export default function BasicTabs() {
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Share />
-        {Posts.map((post) => (
-          <Post key={post.id} post={post} />
-        ))}
+        <Feed username={username} />
+        {/* <Share />
+          {Posts?.map((post) => (
+            <Post key={post._id} post={post} />
+          ))} */}
       </TabPanel>
       <TabPanel value={value} index={2}>
         This area is under construction...

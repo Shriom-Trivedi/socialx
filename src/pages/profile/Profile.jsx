@@ -6,15 +6,29 @@ import { Tooltip } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import "./profile.css";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import axios from "axios";
+import { useParams } from "react-router";
 
 const Profile = () => {
+  const { username } = useParams();
+  const queryClient = new QueryClient();
+  const userQuery = useQuery("user-data", async () => {
+    const userData = await axios.get(`/users?username=${username}`);
+    return userData.data;
+  });
+  const { isLoading, isError, data } = userQuery;
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Topbar />
       <div className='profileContainer'>
         <div className='profileTop'>
           <div className='profileCover'>
-            <img src='/assets/post/3.jpeg' alt='' className='profileCoverImg' />
+            <img
+              src={data?.profilePicture || `/assets/person/no-coverpic.jpg`}
+              alt=''
+              className='profileCoverImg'
+            />
           </div>
         </div>
 
@@ -23,7 +37,9 @@ const Profile = () => {
             <div className='profileCenterTop'>
               <div className='profileUser'>
                 <img
-                  src='/assets/person/1.jpeg'
+                  src={
+                    data?.profilePicture || `/assets/person/no-profilepic.jpg`
+                  }
                   alt=''
                   className='profileUserImg'
                 />
@@ -44,13 +60,13 @@ const Profile = () => {
             </div>
             <div className='profileCenterBottom'>
               <div className='profileName'>
-                <p className='profileUserName'>Shri Om Trivedi</p>
+                <p className='profileUserName'>{data?.name}</p>
                 <Tooltip title='Verified' placement='top'>
                   <img src='/assets/verify.png' alt='' className='verify' />
                 </Tooltip>
               </div>
               <div className='profileUserInfo'>
-                <p className='username'>@shriomatic</p>
+                <p className='username'>{`@${data?.username}`}</p>
                 <div className='location'>
                   <FmdGoodIcon
                     style={{
@@ -73,9 +89,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className='profileBio'>
-                <p className='bio'>
-                  Trained Developer. Untrained Investor. Upcoming Enterpreneur.
-                </p>
+                <p className='bio'>{data?.desc}</p>
               </div>
               <div className='mobile--followLists'>
                 <p className='mobile--followers'>290 followers</p>
@@ -87,11 +101,11 @@ const Profile = () => {
 
         <div className='profileBottom'>
           <div className='profileBottomWrapper'>
-            <TabPanel />
+            <TabPanel username={username} />
           </div>
         </div>
       </div>
-    </>
+    </QueryClientProvider>
   );
 };
 

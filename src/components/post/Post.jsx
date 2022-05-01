@@ -16,10 +16,8 @@ import { format } from "timeago.js";
 
 const Post = ({ post }) => {
   const { comment, createdAt, desc, likes, photo } = post;
-  const user = Users.find((user) => user.id === post.userId);
-
   const userQuery = useQuery("user-data", async () => {
-    const userData = await axios.get(`users/${post.userId}`);
+    const userData = await axios.get(`/users?userId=${post.userId}`);
     return userData.data;
   });
   const { isLoading, isError, data } = userQuery;
@@ -27,7 +25,7 @@ const Post = ({ post }) => {
   // public folder for images added here.
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const [noOfLikes, setLikes] = useState(likes[0]);
+  const [noOfLikes, setLikes] = useState(post?.likes[0]);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
@@ -45,7 +43,7 @@ const Post = ({ post }) => {
         <div className='postTop'>
           <div className='postTopLeft'>
             <img
-              src={data?.profilePicture || `/assets/person/no-profilepic.png`}
+              src={data?.profilePicture || `/assets/person/no-profilepic.jpg`}
               alt=''
               className='postProfileImg'
             />
