@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 import "./login.css";
 import { TextInput } from "../../ui-shared/FormControl/Form/FormControl";
+import { loginCall } from "../../apiCalls";
+import { AuthContext } from "../../context/Auth/AuthContext";
 
 const Login = () => {
+  const email = useRef();
+  const password = useRef();
+  const { isFetching, error, dispatch, user } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginCall(
+      { email: email.current.value, password: password.current.value },
+      dispatch
+    );
+    console.log(email.current.value);
+  };
+  console.log(user);
   return (
     <div className='loginContainer'>
       <div className='loginContainerLeft'>
@@ -37,6 +52,7 @@ const Login = () => {
                 name='email'
                 id='email'
                 w='60%'
+                inputRef={email}
               />
               <TextInput
                 label='Password'
@@ -45,6 +61,7 @@ const Login = () => {
                 name='password'
                 id='password'
                 w='60%'
+                inputRef={password}
               />
               <div className='forgotPassword'>
                 <p>Forgot Password?</p>
@@ -59,7 +76,7 @@ const Login = () => {
                 <label htmlFor='rememberMe'>Remember Me</label>
               </div>
             </div>
-            <div className='signInBtn'>
+            <div className='signInBtn' onClick={handleSubmit}>
               <button className='loginBtn'>Sign In</button>
             </div>
             <div className='createAccount'>
