@@ -1,12 +1,44 @@
-import React from "react";
+import axios from "axios";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { TextInput } from "../../ui-shared/FormControl/Form/FormControl";
 import "./register.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const name = useRef();
+  const username = useRef();
+  const country = useRef();
+  const email = useRef();
+  const password = useRef();
+  const passwordAgain = useRef();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password.current.value !== passwordAgain.current.value) {
+      // TODO: Add some error message in UI.
+      alert("Passwords Don't Match");
+    } else {
+      const user = {
+        name: name.current.value,
+        username: username.current.value,
+        country: country.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      };
+      try {
+        await axios.post("/auth/register", user);
+        navigate("/login");
+      } catch (error) {
+        // TODO: handle error later/maybe add something on UI.
+        console.log(error);
+      }
+    }
+  };
   return (
     <div className='registerContainer'>
       <div className='registerLeft'>
-        <div className='registerLeftWrapper'>
+        <form className='registerLeftWrapper'>
           <div className='registerLeftTop'>
             <p className='registerTitle'>Register</p>
             <p className='registerDesc'>
@@ -24,6 +56,7 @@ const Register = () => {
                   id='name'
                   name='name'
                   w='80%'
+                  inputRef={name}
                 />
                 <TextInput
                   label='Username'
@@ -32,6 +65,7 @@ const Register = () => {
                   id='username'
                   name='username'
                   w='80%'
+                  inputRef={username}
                 />
               </div>
               <div className='registerFormField'>
@@ -42,6 +76,7 @@ const Register = () => {
                   id='country'
                   name='country'
                   w='80%'
+                  inputRef={country}
                 />
                 <TextInput
                   label='Email'
@@ -50,6 +85,7 @@ const Register = () => {
                   id='email'
                   name='email'
                   w='80%'
+                  inputRef={email}
                 />
               </div>
               <div className='registerFormField'>
@@ -60,6 +96,7 @@ const Register = () => {
                   id='password'
                   name='password'
                   w='80%'
+                  inputRef={password}
                 />
                 <TextInput
                   label='Confirm Password'
@@ -68,6 +105,7 @@ const Register = () => {
                   id='confirmPassword'
                   name='confirmPassword'
                   w='80%'
+                  inputRef={passwordAgain}
                 />
               </div>
             </div>
@@ -85,7 +123,7 @@ const Register = () => {
                 <span>Fees</span>
               </label>
             </div>
-            <div className='createAccountContainer'>
+            <div className='createAccountContainer' onClick={handleSubmit}>
               <button className='createAccountButton'>Create Account</button>
             </div>
             <div className='loginLinkContainer'>
@@ -93,7 +131,7 @@ const Register = () => {
               <span className='loginLinkItem loginLink'>Login</span>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div className='registerRight'>
         <div className='registerRightWrapper'>
