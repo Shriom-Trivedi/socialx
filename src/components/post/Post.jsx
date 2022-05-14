@@ -1,44 +1,72 @@
-import { MoreVert } from "@mui/icons-material";
+import { CompressOutlined, MoreVert } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import { Users } from "../../dummyData";
 import "./post.css";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { format } from "timeago.js";
+import { AuthContext } from "../../context/Auth/AuthContext";
 
 const Post = ({ post }) => {
-  const { comment, date, desc, like, photo } = post;
-  const user = Users.find((user) => user.id === post.userId);
-  const { profilePicture, username } = user;
+  const { user: currentUser } = useContext(AuthContext);
+  const { userId, comment, createdAt, desc, likes, photo } = post;
+  const userQuery = useQuery(["user-data", userId], async () => {
+    const userData = await axios.get(`/users?userId=${userId}`);
+    return userData.data;
+  });
+
+  const { isLoading, isError, data } = userQuery;
 
   // public folder for images added here.
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const [likes, setLikes] = useState(like);
+  const [noOfLikes, setNoOfLikes] = useState(likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
-  const handleLike = () => {
-    setLikes(isLiked ? likes - 1 : likes + 1);
-    setIsLiked(!isLiked);
+  const handleLike = async () => {
+    let tempLikes = noOfLikes;
+    let tempIsLiked = isLiked;
+    try {
+      setNoOfLikes(isLiked ? noOfLikes - 1 : noOfLikes + 1);
+      setIsLiked(!isLiked);
+      const data = {
+        userId: currentUser._id,
+      };
+      await axios.put(`/posts/${post._id}/like`, data);
+    } catch (error) {
+      setNoOfLikes(tempLikes);
+      setIsLiked(tempIsLiked);
+    }
   };
 
   const handleSave = () => {
     setIsSaved(!isSaved);
   };
+
+  // Checks if the user has liked the post or not. If the user has liked the post, then the icon will be filled. If the user has not liked the post, then the icon will be empty.
+  useEffect(() => {
+    setIsLiked(likes.includes(currentUser._id));
+  }, [likes, currentUser._id]);
   return (
     <div className='post'>
       <div className='postWrapper'>
         <div className='postTop'>
           <div className='postTopLeft'>
-            <img src={profilePicture} alt='' className='postProfileImg' />
-            <span className='postUsername'>{username}</span>
-            <span className='postDate'>{date}</span>
+            <img
+              src={data?.profilePicture || `/assets/person/no-profilepic.jpg`}
+              alt=''
+              className='postProfileImg'
+            />
+            <span className='postUsername'>{data?.username}</span>
+            <span className='postDate'>{format(createdAt)}</span>
           </div>
           <Tooltip title='More' arrow>
             <div className='postTopRight'>
@@ -71,7 +99,7 @@ const Post = ({ post }) => {
                     isLiked === true && "likedPostText likeCounterAnimation"
                   } ${isLiked === false && "unlikeCounterAnimation"}`}
                 >
-                  {likes}
+                  {noOfLikes}
                 </span>
               </div>
             </Tooltip>

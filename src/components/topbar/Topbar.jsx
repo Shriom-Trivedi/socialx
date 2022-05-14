@@ -4,11 +4,13 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { Badge, Tooltip } from "@mui/material";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import SearchResult from "../searchResult/SearchResult";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/Auth/AuthContext";
 
 const Topbar = () => {
+  const { user } = useContext(AuthContext);
   const searchRef = useRef();
   const [isSearchActive, setIsSearchActive] = useState(false);
   let navigate = useNavigate();
@@ -75,7 +77,11 @@ const Topbar = () => {
             </Tooltip>
           </div>
         </div>
-        <img src='/assets/person/1.jpeg' alt='' className='topbarImg' />
+        <img
+          src={user?.profilePicture || `/assets/person/no-profilepic.jpg`}
+          alt=''
+          className='topbarImg'
+        />
       </div>
     </div>
   );

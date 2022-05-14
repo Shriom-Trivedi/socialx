@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./share.css";
 import { Tooltip } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
@@ -7,20 +7,23 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import { AuthContext } from "../../context/Auth/AuthContext";
 
-const Share = () => {
+const Share = ({ user }) => {
+  const name = user?.name.split(" ");
+  const firstName = user && name[0];
   return (
     <div className='share'>
       <div className='shareWrapper'>
         <div className='shareTop'>
           <img
-            src='/assets/person/1.jpeg'
+            src={user?.profilePicture || `/assets/person/no-profilepic.jpg`}
             alt=''
             className='shareProfilePicture'
           />
           <input
             type='text'
-            placeholder={`What's in your mind today Shri?`}
+            placeholder={`What's in your mind today ${firstName}?`}
             className='shareInput'
           />
         </div>

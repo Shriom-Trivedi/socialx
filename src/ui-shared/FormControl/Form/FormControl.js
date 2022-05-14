@@ -7,6 +7,7 @@ export const TextInput = ({
   name,
   id,
   w = "100%",
+  inputRef = null,
 }) => {
   return (
     <div className='formGroup' style={{ width: w }}>
@@ -19,6 +20,7 @@ export const TextInput = ({
         id={id}
         className='loginInput'
         placeholder={placeholder}
+        ref={inputRef}
       />
     </div>
   );
