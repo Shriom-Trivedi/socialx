@@ -27,9 +27,11 @@ router.post("/register", async (req, res) => {
 
 // LOGIN
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    const user = await User.findOne({ username: username });
+    const user =
+      (await User.findOne({ email: email })) ||
+      (await User.findOne({ username: email }));
     if (!user) {
       res.status(404).json("User not found");
     }
