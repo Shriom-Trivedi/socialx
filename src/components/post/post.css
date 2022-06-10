@@ -121,6 +121,13 @@
   animation: unlikeCounterAnimation 0.15s;
 }
 
+.postUserDesc {
+  font-size: 12px;
+  /* color: var(--text-gray); */
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 10px;
+}
+
 @keyframes likeCounterAnimation {
   0% {
     transform: translateY(2rem);

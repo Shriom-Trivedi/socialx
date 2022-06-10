@@ -1,5 +1,5 @@
-import React from "react";
-import "./sidebar.css";
+import React, { useContext } from 'react';
+import './sidebar.css';
 import {
   Bookmark,
   Chat,
@@ -10,89 +10,115 @@ import {
   RssFeed,
   School,
   WorkOutline,
-} from "@mui/icons-material";
+} from '@mui/icons-material';
+import { useQuery } from 'react-query';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const sidebar = () => {
+const sidebarList = [
+  {
+    id: 1,
+    name: 'Feed',
+    icon: <RssFeed />,
+    link: '/',
+  },
+  {
+    id: 2,
+    name: 'Chats',
+    icon: <Chat />,
+  },
+  {
+    id: 3,
+    name: 'Videos',
+    icon: <PlayCircleFilledOutlined />,
+  },
+  {
+    id: 4,
+    name: 'Groups',
+    icon: <Group />,
+  },
+  {
+    id: 5,
+    name: 'Saved',
+    icon: <Bookmark />,
+  },
+  {
+    id: 6,
+    name: 'Questions',
+    icon: <HelpOutline />,
+  },
+  {
+    id: 7,
+    name: 'Jobs',
+    icon: <WorkOutline />,
+  },
+  {
+    id: 8,
+    name: 'Events',
+    icon: <Event />,
+  },
+  {
+    id: 9,
+    name: 'Courses',
+    icon: <School />,
+  },
+];
+
+const Sidebar = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const friendsQuery = useQuery(['user-friends', user._id], async () => {
+    const data = await axios.get(`/users/friends/${user._id}`);
+    return data.data;
+  });
+  const { isLoading, isError, data } = friendsQuery;
+
   return (
     <div className='sidebar'>
       <div className='sidebarContainer'>
         <ul className='sidebarList'>
-          <li className='sidebarListItem'>
-            <RssFeed className='sidebarIcon' />
-            <span className='sidebarListItemText'>Feed</span>
-          </li>
-          <li className='sidebarListItem'>
-            <Chat className='sidebarIcon' />
-            <span className='sidebarListItemText'>Chats</span>
-          </li>
-          <li className='sidebarListItem'>
-            <PlayCircleFilledOutlined className='sidebarIcon' />
-            <span className='sidebarListItemText'>Videos</span>
-          </li>
-          <li className='sidebarListItem'>
-            <Group className='sidebarIcon' />
-            <span className='sidebarListItemText'>Groups</span>
-          </li>
-          <li className='sidebarListItem'>
-            <Bookmark className='sidebarIcon' />
-            <span className='sidebarListItemText'>Saved</span>
-          </li>
-          <li className='sidebarListItem'>
-            <HelpOutline className='sidebarIcon' />
-            <span className='sidebarListItemText'>Questions</span>
-          </li>
-          <li className='sidebarListItem'>
-            <WorkOutline className='sidebarIcon' />
-            <span className='sidebarListItemText'>Jobs</span>
-          </li>
-          <li className='sidebarListItem'>
-            <Event className='sidebarIcon' />
-            <span className='sidebarListItemText'>Events</span>
-          </li>
-          <li className='sidebarListItem'>
-            <School className='sidebarIcon' />
-            <span className='sidebarListItemText'>Courses</span>
-          </li>
+          {sidebarList.map((item) => (
+            <li
+              key={item.id}
+              className={`sidebarListItem ${
+                window.location.pathname === item.link ? 'sidebarActive' : ''
+              }`}
+              onClick={() => navigate(item.link)}
+            >
+              <span className='sidebarIcon'>{item.icon}</span>
+              <span className='sidebarListItemText'>{item.name}</span>
+            </li>
+          ))}
         </ul>
-        <button className="btn-primary">Show More</button>
-        <hr className="sidebarHr" />
-        <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">John Jacobs</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/4.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">Shane Helms</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/5.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">Maria Maria</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/3.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">Dave Bautista</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/1.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">Julia Beckman</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/6.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">Benn Beckman</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/7.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">Fiona Markus</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/8.jpeg" alt="" className="sidebarFriendImg" />
-            <span className="sidebarfriendName">Nico Robin</span>
-          </li>
+        <button className='btn-primary'>Show More</button>
+        <hr className='sidebarHr' />
+        <ul className='sidebarFriendList'>
+          {data &&
+            data.map((friend) => {
+              return (
+                <li
+                  key={friend._id}
+                  className='sidebarFriend'
+                  onClick={() => navigate(`/profile/${friend.username}`)}
+                >
+                  <img
+                    src={
+                      (friend.profilePicture && friend.profilePicture) ||
+                      '/assets/person/no-profilepic.jpg'
+                    }
+                    alt=''
+                    className='sidebarFriendImg'
+                  />
+                  <span className='sidebarfriendName'>{friend.name}</span>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </div>
   );
 };
 
-export default sidebar;
+export default Sidebar;

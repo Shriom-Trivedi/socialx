@@ -73,6 +73,11 @@
   font-size: 14px;
 }
 
+.sidebarActive {
+  background-color: var(--gray-light);
+  color: var(--blue-light);
+}
+
 @media screen and (max-width: 768px) {
   .sidebar {
     display: none;
