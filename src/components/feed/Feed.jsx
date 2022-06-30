@@ -7,6 +7,7 @@ import axios from 'axios';
 import './feed.css';
 import { TodayOutlined } from '@mui/icons-material';
 import { AuthContext } from '../../context/Auth/AuthContext';
+import SkeletonLoader from '../../ui-shared/common/loader/Skeleton';
 
 const Feed = ({ username }) => {
   const { user } = useContext(AuthContext);
@@ -54,9 +55,15 @@ const Feed = ({ username }) => {
             />
           )}
 
-          {posts?.map((post) => (
+          {isLoading ? (
+            <SkeletonLoader />
+          ) : (
+            posts?.map((post) => <Post key={post._id} post={post} />)
+          )}
+
+          {/* {posts?.map((post) => (
             <Post key={post._id} post={post} />
-          ))}
+          ))} */}
         </div>
       </div>
     </QueryClientProvider>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './rightbar.css';
-import { jobs, suggestedPeople, trendingNews, Users } from '../../dummyData';
+import { jobs, trendingNews, Users } from '../../dummyData';
 import { ArrowForward } from '@mui/icons-material';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 

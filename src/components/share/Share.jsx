@@ -39,37 +39,17 @@ const Share = ({ user, invalidateTimeline }) => {
       newPost.img = fileName;
       try {
         axios.post('/upload', formData);
-        setSnackBar({
-          message: 'Post successfully uploaded',
-          variant: 'success',
-        });
-        setIsSnackbarOpen(true);
+
         invalidateTimeline();
-        // window.location.reload();
-        // navigate('/');
+        window.location.reload();
       } catch (error) {
         console.log(error);
-        setSnackBar({
-          message: 'Something went wrong',
-          variant: 'error',
-        });
-        setIsSnackbarOpen(true);
       }
     }
     try {
       newPost.desc && (await axios.post('/posts', newPost));
-      setSnackBar({
-        message: 'Post successfully uploaded',
-        variant: 'success',
-      });
-      setIsSnackbarOpen(true);
     } catch (error) {
       console.log(error);
-      setSnackBar({
-        message: 'Something went wrong',
-        variant: 'error',
-      });
-      setIsSnackbarOpen(true);
     }
   };
   return (
