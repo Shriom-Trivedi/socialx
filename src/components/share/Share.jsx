@@ -40,7 +40,7 @@ const Share = ({ user, invalidateTimeline }) => {
       try {
         axios.post('/upload', formData);
 
-        invalidateTimeline();
+        // invalidateTimeline();
         window.location.reload();
       } catch (error) {
         console.log(error);
@@ -48,6 +48,8 @@ const Share = ({ user, invalidateTimeline }) => {
     }
     try {
       newPost.desc && (await axios.post('/posts', newPost));
+      // invalidateTimeline();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

@@ -42,6 +42,7 @@ const sidebarList = [
     id: 5,
     name: 'Saved',
     icon: <Bookmark />,
+    link: '/saved',
   },
   {
     id: 6,
