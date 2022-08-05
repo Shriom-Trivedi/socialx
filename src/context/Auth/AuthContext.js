@@ -1,8 +1,9 @@
-import { createContext, useReducer } from "react";
-import AuthReducer from "./AuthReducer";
+import { createContext, useReducer } from 'react';
+import AuthReducer from './AuthReducer';
 
+const userData = sessionStorage.getItem('user');
 const INITIAL_STATE = {
-  user: null, // user is null if not logged in
+  user: JSON.parse(userData), // user is null if not logged in
   isFetching: false, // isFetching is true if fetching user
   error: null, // error is null if no error
 };

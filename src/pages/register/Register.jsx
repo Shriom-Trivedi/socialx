@@ -1,8 +1,8 @@
-import axios from "axios";
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { TextInput } from "../../ui-shared/FormControl/Form/FormControl";
-import "./register.css";
+import axios from 'axios';
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TextInput } from '../../ui-shared/FormControl/Form/FormControl';
+import './register.css';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -27,8 +27,8 @@ const Register = () => {
         password: password.current.value,
       };
       try {
-        await axios.post("/auth/register", user);
-        navigate("/login");
+        await axios.post('/auth/register', user);
+        navigate('/login');
       } catch (error) {
         // TODO: handle error later/maybe add something on UI.
         console.log(error);
@@ -119,7 +119,7 @@ const Register = () => {
                 className='termsAndConditionsCheckbox'
               />
               <label htmlFor='termsAndConditions'>
-                I agree to all the <span>Terms, Privacy Policy</span> and{" "}
+                I agree to all the <span>Terms, Privacy Policy</span> and{' '}
                 <span>Fees</span>
               </label>
             </div>
@@ -128,7 +128,12 @@ const Register = () => {
             </div>
             <div className='loginLinkContainer'>
               <span className='loginLinkItem'>Already have an account?</span>
-              <span className='loginLinkItem loginLink'>Login</span>
+              <span
+                className='loginLinkItem loginLink'
+                onClick={() => navigate('/login')}
+              >
+                Login
+              </span>
             </div>
           </div>
         </form>

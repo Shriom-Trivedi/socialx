@@ -15,9 +15,7 @@ const Login = () => {
       { email: email.current.value, password: password.current.value },
       dispatch
     );
-    console.log(email.current.value);
   };
-  console.log(user);
   return (
     <div className='loginContainer'>
       <div className='loginContainerLeft'>

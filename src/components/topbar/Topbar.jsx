@@ -1,36 +1,37 @@
-import "./topbar.css";
-import { Search } from "@mui/icons-material";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import { Badge, Tooltip } from "@mui/material";
-import { useContext, useRef, useState } from "react";
-import SearchResult from "../searchResult/SearchResult";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/Auth/AuthContext";
+import './topbar.css';
+import { Search } from '@mui/icons-material';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import { Badge, Tooltip } from '@mui/material';
+import { useContext, useRef, useState } from 'react';
+import SearchResult from '../searchResult/SearchResult';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/Auth/AuthContext';
 
 const Topbar = () => {
   const { user } = useContext(AuthContext);
   const searchRef = useRef();
   const [isSearchActive, setIsSearchActive] = useState(false);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  console.log(user);
 
   const handleFocusIn = () => {
-    searchRef.current.style.backgroundColor = "white";
-    searchRef.current.style.border = "0.5px solid #81c6ff";
+    searchRef.current.style.backgroundColor = 'white';
+    searchRef.current.style.border = '0.5px solid #81c6ff';
     setIsSearchActive(true);
   };
 
   const handleFocusOut = () => {
-    searchRef.current.style.backgroundColor = "#e7e7e7";
-    searchRef.current.style.border = "0.5px solid #fff";
+    searchRef.current.style.backgroundColor = '#e7e7e7';
+    searchRef.current.style.border = '0.5px solid #fff';
     setIsSearchActive(false);
   };
 
   return (
     <div className='topbarContainer'>
       <div className='topbarLeft'>
-        <span className='logo' onClick={() => navigate("/")}>
+        <span className='logo' onClick={() => navigate('/')}>
           SOCIALX
         </span>
       </div>
@@ -81,6 +82,7 @@ const Topbar = () => {
           src={user?.profilePicture || `/assets/person/no-profilepic.jpg`}
           alt=''
           className='topbarImg'
+          onClick={() => navigate(`/profile/${user?.username}`)}
         />
       </div>
     </div>

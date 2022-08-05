@@ -1,23 +1,25 @@
-import { CompressOutlined, MoreVert } from "@mui/icons-material";
-import { Tooltip } from "@mui/material";
-import React, { useContext, useEffect } from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import "./post.css";
-import { useState } from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
-import { format } from "timeago.js";
-import { AuthContext } from "../../context/Auth/AuthContext";
+import { MoreVert } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
+import React, { useContext, useEffect, useRef } from 'react';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import './post.css';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import { format } from 'timeago.js';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Post = ({ post }) => {
   const { user: currentUser } = useContext(AuthContext);
-  const { userId, comment, createdAt, desc, likes, photo } = post;
-  const userQuery = useQuery(["user-data", userId], async () => {
+  const navigate = useNavigate();
+  const { userId, comment, createdAt, desc, likes, img } = post;
+  const userQuery = useQuery(['user-data', userId], async () => {
     const userData = await axios.get(`/users?userId=${userId}`);
     return userData.data;
   });
@@ -30,6 +32,7 @@ const Post = ({ post }) => {
   const [noOfLikes, setNoOfLikes] = useState(likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [truncateLength, setTruncateLength] = useState(45);
 
   const handleLike = async () => {
     let tempLikes = noOfLikes;
@@ -55,6 +58,19 @@ const Post = ({ post }) => {
   useEffect(() => {
     setIsLiked(likes.includes(currentUser._id));
   }, [likes, currentUser._id]);
+
+  const truncate = (string, n) => {
+    return string?.length > n ? string.substr(0, n - 1) + '...' : string;
+  };
+
+  // useEffect(() => {
+  //   if (window.innerWidth < 918) {
+  //     setTruncateLength(45);
+  //   } else {
+  //     setTruncateLength(70);
+  //   }
+  // },[window.innerWidth]);
+
   return (
     <div className='post'>
       <div className='postWrapper'>
@@ -64,9 +80,21 @@ const Post = ({ post }) => {
               src={data?.profilePicture || `/assets/person/no-profilepic.jpg`}
               alt=''
               className='postProfileImg'
+              onClick={() => navigate(`/profile/${data?.username}`)}
             />
-            <span className='postUsername'>{data?.username}</span>
-            <span className='postDate'>{format(createdAt)}</span>
+            <div onClick={() => navigate(`/profile/${data?.username}`)}>
+              <div>
+                <span className='postUsername'>{data?.username}</span>
+                <span className='postDate'>{format(createdAt)}</span>
+              </div>
+              <div>
+                {data?.desc && (
+                  <span className='postUserDesc'>
+                    {truncate(data?.desc, truncateLength)}
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
           <Tooltip title='More' arrow>
             <div className='postTopRight'>
@@ -76,11 +104,11 @@ const Post = ({ post }) => {
         </div>
         <div className='postCenter'>
           <span className='postText'>{desc}</span>
-          <img src={photo} alt='' className='postImg' />
+          <img src={PF + img} alt='' className='postImg' />
         </div>
         <div className='postBottom'>
           <div className='postBottomLeft'>
-            <Tooltip title={`${isLiked === true ? "Unlike" : "Like"}`} arrow>
+            <Tooltip title={`${isLiked === true ? 'Unlike' : 'Like'}`} arrow>
               <div
                 className='postBottomLeftIcons postBottomLike'
                 onClick={handleLike}
@@ -88,7 +116,7 @@ const Post = ({ post }) => {
                 {isLiked === true ? (
                   <FavoriteIcon
                     className='postBottomLeftIcon '
-                    style={{ color: "#db6565" }}
+                    style={{ color: '#db6565' }}
                   />
                 ) : (
                   <FavoriteBorderIcon className='postBottomLeftIcon like' />
@@ -96,8 +124,8 @@ const Post = ({ post }) => {
 
                 <span
                   className={`postLikeCounter ${
-                    isLiked === true && "likedPostText likeCounterAnimation"
-                  } ${isLiked === false && "unlikeCounterAnimation"}`}
+                    isLiked === true && 'likedPostText likeCounterAnimation'
+                  } ${isLiked === false && 'unlikeCounterAnimation'}`}
                 >
                   {noOfLikes}
                 </span>
@@ -116,7 +144,7 @@ const Post = ({ post }) => {
             </Tooltip>
           </div>
           <div className='postBottomRight'>
-            <Tooltip title={`${isSaved === true ? "Saved" : "Save"}`} arrow>
+            <Tooltip title={`${isSaved === true ? 'Saved' : 'Save'}`} arrow>
               {isSaved === true ? (
                 <div
                   className='postBottomRightIcons postBottomSave'
@@ -124,7 +152,7 @@ const Post = ({ post }) => {
                 >
                   <BookmarkOutlinedIcon
                     className='postBottomRightIcon'
-                    style={{ color: "#7bb990" }}
+                    style={{ color: '#7bb990' }}
                   />
                 </div>
               ) : (

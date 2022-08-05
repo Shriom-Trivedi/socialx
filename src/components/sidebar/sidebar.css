@@ -36,6 +36,7 @@
 
 .sidebarIcon {
   margin: 0 15px;
+  color: var(--text-gray) !important;
 }
 
 .sidebarHr {
@@ -71,6 +72,15 @@
 
 .sidebarfriendName {
   font-size: 14px;
+}
+
+.sidebarActive {
+  background-color: var(--gray-light);
+  color: var(--blue-light);
+}
+
+.sidebarActive .sidebarIcon {
+  color: var(--blue-light) !important;
 }
 
 @media screen and (max-width: 768px) {
