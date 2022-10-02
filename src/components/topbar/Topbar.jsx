@@ -23,7 +23,7 @@ const Topbar = () => {
   };
 
   const handleFocusOut = () => {
-    searchRef.current.style.backgroundColor = '#e7e7e7';
+    searchRef.current.style.backgroundColor = '#f5f5f5';
     searchRef.current.style.border = '0.5px solid #fff';
     setIsSearchActive(false);
   };

@@ -45,7 +45,7 @@
   width: 90%;
   height: 35px;
   padding: 5px;
-  background-color: var(--gray);
+  background-color: var(--gray-light); 
   display: flex;
   align-items: center;
   border-radius: 5px;
