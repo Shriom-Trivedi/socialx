@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 .registerContainer {
   overflow: hidden;
@@ -28,7 +28,7 @@
 }
 
 .registerTitle {
-  font-family: "Paytone One", sans-serif;
+  font-family: 'Paytone One', sans-serif;
   font-size: 36px;
   color: var(--text-dark);
   margin-bottom: 50px;
@@ -140,11 +140,11 @@
   max-width: 70%;
   word-spacing: 0.2rem;
 
-  font-family: "Paytone One", sans-serif;
+  font-family: 'Paytone One', sans-serif;
 }
 
 .registerHeading p span {
-  font-family: "Paytone One", sans-serif;
+  font-family: 'Paytone One', sans-serif;
   /* color: #ff3089; */
   color: #f04b93;
   text-shadow: 1px 1.5px #fafafa;
@@ -164,4 +164,25 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+@media screen and (max-width: 912px) {
+  .registerContainer {
+    overflow-y: scroll;
+  }
+  .registerRight {
+    display: none;
+  }
+
+  .registerFormField {
+    flex-direction: column;
+  }
+
+  .createAccountButton {
+    width: 100%;
+  }
+
+  .registerDesc {
+    max-width: 80%;
+  }
 }
