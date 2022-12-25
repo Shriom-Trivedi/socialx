@@ -1,11 +1,14 @@
 const router = require('express').Router();
 const User = require('../models/Users');
+const RefreshTokenModel = require('../models/RefreshTokenModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { findOne } = require('../models/Users');
 const {
   generateAccessToken,
   generateRefreshToken,
 } = require('../token/generateToken');
+const { verify } = require('../token/verify');
 
 // REGISTER
 router.post('/register', async (req, res) => {
@@ -45,21 +48,82 @@ router.post('/login', async (req, res) => {
     if (user) {
       // Generate access token
       accessToken = generateAccessToken(user);
-      console.log('AFTER GEN TOKEN', accessToken);
       refreshToken = generateRefreshToken(user);
-      console.log('AFTER REF TOKEN', refreshToken);
+
+      // Save refresh token in mongodb
+      const find_refreshToken_in_schema = await RefreshTokenModel.findOne({
+        user: user._id,
+      });
+
+      if (!find_refreshToken_in_schema) {
+        const refreshTokenModel = new RefreshTokenModel({
+          token: refreshToken,
+          user: user._id,
+        });
+        await refreshTokenModel.save();
+      } else {
+        let newRefreshToken = await RefreshTokenModel.findOneAndUpdate(
+          { user: user._id },
+          { token: refreshToken },
+          { new: true }
+        );
+      }
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       res.status(404).json('Wrong password');
     }
-    console.log('RETURN CONSOLE', { ...user, accessToken, refreshToken });
     res.status(200).json({ ...user, accessToken, refreshToken });
   } catch (err) {
     console.log('ERROR', err);
     res.status(500).json(err);
   }
+});
+
+router.post('/refresh', async (req, res) => {
+  // take the refresh token from the user
+  const refreshToken = req.body.token;
+
+  // send error if there is no token or it is invalid
+  if (!refreshToken) return res.status(401).json('You are not authenticated');
+  const find_refreshToken_in_schema = await RefreshTokenModel.findOne({
+    token: refreshToken,
+  });
+  if (!find_refreshToken_in_schema) {
+    return res.status(403).json('Refresh token is not valid!');
+  }
+
+  jwt.verify(
+    refreshToken,
+    process.env.REFRESH_TOKEN_SECRET_KEY,
+    async (err, user) => {
+      err && console.log(err);
+
+      // await find_refreshToken_in_schema.deleteOne(); // delete refresh token
+
+      const newAccessToken = generateAccessToken(user);
+      const newRefreshToken = generateRefreshToken(user);
+
+      await find_refreshToken_in_schema.updateOne({
+        $set: { token: newRefreshToken },
+      });
+
+      res.status(200).json({
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+      });
+    }
+  );
+});
+
+router.post('/logout', verify, async (req, res) => {
+  const refreshToken = req.body.token;
+  const find_refreshToken_in_schema = await RefreshTokenModel.findOne({
+    token: refreshToken,
+  });
+  await find_refreshToken_in_schema.deleteOne();
+  res.status(200).json('You have been logged out successfully!');
 });
 
 module.exports = router;
