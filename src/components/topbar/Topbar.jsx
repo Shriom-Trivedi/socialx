@@ -14,7 +14,6 @@ const Topbar = () => {
   const searchRef = useRef();
   const [isSearchActive, setIsSearchActive] = useState(false);
   const navigate = useNavigate();
-  console.log(user);
 
   const handleFocusIn = () => {
     searchRef.current.style.backgroundColor = 'white';
@@ -79,10 +78,10 @@ const Topbar = () => {
           </div>
         </div>
         <img
-          src={user?.profilePicture || `/assets/person/no-profilepic.jpg`}
+          src={user?._doc?.profilePicture || `/assets/person/no-profilepic.jpg`}
           alt=''
           className='topbarImg'
-          onClick={() => navigate(`/profile/${user?.username}`)}
+          onClick={() => navigate(`/profile/${user?._doc.username}`)}
         />
       </div>
     </div>

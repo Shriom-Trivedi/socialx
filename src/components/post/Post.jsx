@@ -14,6 +14,7 @@ import axios from 'axios';
 import { format } from 'timeago.js';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import CommentSection from '../commentSection/CommentSection';
 
 const Post = ({ post }) => {
   const { user: currentUser } = useContext(AuthContext);
@@ -41,7 +42,7 @@ const Post = ({ post }) => {
       setNoOfLikes(isLiked ? noOfLikes - 1 : noOfLikes + 1);
       setIsLiked(!isLiked);
       const data = {
-        userId: currentUser._id,
+        userId: currentUser._doc._id,
       };
       await axios.put(`/posts/${post._id}/like`, data);
     } catch (error) {
@@ -56,8 +57,8 @@ const Post = ({ post }) => {
 
   // Checks if the user has liked the post or not. If the user has liked the post, then the icon will be filled. If the user has not liked the post, then the icon will be empty.
   useEffect(() => {
-    setIsLiked(likes.includes(currentUser._id));
-  }, [likes, currentUser._id]);
+    setIsLiked(likes.includes(currentUser._doc._id));
+  }, [likes, currentUser._doc._id]);
 
   const truncate = (string, n) => {
     return string?.length > n ? string.substr(0, n - 1) + '...' : string;
@@ -166,6 +167,9 @@ const Post = ({ post }) => {
             </Tooltip>
           </div>
         </div>
+        {/* Comment section */}
+        {/* <CommentSection /> */}
+        
       </div>
     </div>
   );

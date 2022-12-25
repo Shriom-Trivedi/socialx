@@ -13,7 +13,7 @@ import axios from 'axios';
 import SnackBar from '../../ui-shared/common/SnackBar';
 
 const Share = ({ user, invalidateTimeline }) => {
-  const name = user?.name.split(' ');
+  const name = user?._doc.name.split(' ');
   const firstName = user && name[0];
   const descRef = useRef();
   const [file, setFile] = useState(null);
@@ -27,7 +27,7 @@ const Share = ({ user, invalidateTimeline }) => {
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
-      userId: user._id,
+      userId: user._doc?._id,
       desc: descRef.current.value,
     };
     if (file) {
@@ -59,10 +59,10 @@ const Share = ({ user, invalidateTimeline }) => {
       <form className='shareWrapper' onSubmit={handlePostSubmit}>
         <div className='shareTop'>
           <img
-            src={user?.profilePicture || `/assets/person/no-profilepic.jpg`}
+            src={user?._doc.profilePicture || `/assets/person/no-profilepic.jpg`}
             alt=''
             className='shareProfilePicture'
-            onClick={() => navigate(`/profile/${user?.username}`)}
+            onClick={() => navigate(`/profile/${user?._doc.username}`)}
           />
           <input
             type='text'

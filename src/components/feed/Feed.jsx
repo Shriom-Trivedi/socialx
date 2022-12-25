@@ -18,7 +18,7 @@ const Feed = ({ username }) => {
     async () => {
       const data = username
         ? await axios.get(`/posts/profile/${username}`)
-        : await axios.get(`posts/timeline/${user._id}`);
+        : await axios.get(`posts/timeline/${user._doc._id}`);
       return data.data;
     },
     {
@@ -32,7 +32,7 @@ const Feed = ({ username }) => {
   const { isLoading, isError, data } = postsQuery;
 
   const isShareOpen =
-    window.location.pathname === `/profile/${user.username}` ||
+    window.location.pathname === `/profile/${user._doc.username}` ||
     window.location.pathname === '/';
 
   return (
