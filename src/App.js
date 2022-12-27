@@ -1,30 +1,51 @@
-import Profile from "./pages/profile/Profile";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+import Profile from './pages/profile/Profile';
+import Home from './pages/home/Home';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
 import {
   BrowserRouter,
   Routes,
   Route,
   useLocation,
   Navigate,
-} from "react-router-dom";
-import ProgressBar from "@badrap/bar-of-progress";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "./context/Auth/AuthContext";
+} from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import ProgressBar from '@badrap/bar-of-progress';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from './context/Auth/AuthContext';
+import axios from 'axios';
+import { refreshCall } from './apiCalls';
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const queryClient = new QueryClient();
   const progress = new ProgressBar({
     size: 4,
-    color: "#00bcd4",
-    style: { zIndex: "9999" },
+    color: '#00bcd4',
+    style: { zIndex: '9999' },
     delay: 100,
   });
 
   const location = useLocation();
+
+  const axiosJwt = axios.create();
+  axiosJwt.interceptors.request.use(
+    async (config) => {
+      let currentDate = new Date();
+      const decodedToken = jwt_decode(user.accessToken);
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        const data = await refreshCall(user, dispatch);
+        console.log(data);
+        config.headers['authorization'] = `Bearer ${data.accessToken}`;
+      }
+      return config;
+    },
+    (err) => {
+      console.log(err);
+      return Promise.reject(err);
+    }
+  );
 
   useEffect(() => {
     progress.start();
