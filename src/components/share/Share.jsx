@@ -48,7 +48,6 @@ const Share = ({ user, invalidateTimeline }) => {
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
     const newPost = {
       userId: user._doc?._id,
       desc: descRef.current.value,
@@ -63,8 +62,8 @@ const Share = ({ user, invalidateTimeline }) => {
       try {
         axios.post('/upload', formData);
 
-        // invalidateTimeline();
-        window.location.reload();
+        invalidateTimeline();
+        // window.location.reload();
       } catch (error) {
         console.log(error);
       }
@@ -74,8 +73,8 @@ const Share = ({ user, invalidateTimeline }) => {
         (await axiosJwt.post('/posts', newPost, {
           headers: { authorization: `Bearer ${user.accessToken}` },
         }));
-      // invalidateTimeline();
-      window.location.reload();
+      invalidateTimeline();
+      // window.location.reload();
     } catch (error) {
       console.log(error);
     }

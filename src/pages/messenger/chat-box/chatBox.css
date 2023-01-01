@@ -1,0 +1,4 @@
+.chatBoxContainer {
+    flex: 4;
+    display: flex;
+}

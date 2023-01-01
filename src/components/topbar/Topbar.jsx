@@ -62,7 +62,7 @@ const Topbar = () => {
               </Badge>
             </Tooltip>
           </div>
-          <div className='topbarIconItem'>
+          <div className='topbarIconItem' onClick={() => navigate('/messenger')}>
             <Tooltip title='Messages' arrow>
               <Badge badgeContent={4} color='primary'>
                 <ChatOutlinedIcon className='topbarIcon' />

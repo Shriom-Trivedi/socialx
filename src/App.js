@@ -16,6 +16,7 @@ import { useContext, useEffect } from 'react';
 import { AuthContext } from './context/Auth/AuthContext';
 import axios from 'axios';
 import { refreshCall } from './apiCalls';
+import Messenger from './pages/messenger/Messenger';
 
 function App() {
   const { user, dispatch } = useContext(AuthContext);
@@ -69,6 +70,10 @@ function App() {
             element={user ? <Navigate to='/' replace /> : <Register />}
           />
           <Route path='/profile/:username' element={<Profile />} />
+          <Route
+            path='/messenger'
+            element={!user ? <Navigate to='/' /> : <Messenger />}
+          />
         </Routes>
       </div>
     </QueryClientProvider>

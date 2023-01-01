@@ -50,7 +50,7 @@ const Feed = ({ username }) => {
             <Share
               user={user}
               invalidateTimeline={() => {
-                queryClient.invalidateQueries('timeline-posts');
+                queryClient.refetchQueries(['timeline-posts']);
               }}
             />
           )}
