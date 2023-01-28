@@ -1,4 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 .chatBoxMessages {
-    flex: 5;
-    background-color: lightseagreen;
+  flex: 5;
+  height: 100%;
+  padding: 20px 30px 15px 0;
+}
+
+.chatBoxMessagesWrapper {
+  padding: 15px;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #edf0f5;
+}
+
+/* Message css */
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.messageTop {
+  display: flex;
+}
+
+.messageImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  z-index: 10;
+}
+
+.messageText {
+  padding: 15px 18px;
+  border-radius: 15px;
+  background-color: #fff;
+  max-width: 450px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+  color: #343d57;
+}
+
+.messageBottom {
+  margin-top: 10px;
+  max-width: 480px;
+  display: flex;
+  justify-content: end;
+  font-size: 0.7rem;
+  color: var(--text-gray);
+}
+
+.message.own {
+  align-items: flex-end;
+}
+
+.message.own .messageText {
+  background-color: #d0d3e3;
+  color: #464e67;
+}
+
+.message.own .messageTop {
+  flex-direction: row-reverse;
+}
+
+.message.own .messageImg {
+  margin-left: 10px;
+}
+
+.message.own .messageBottom {
+  max-width: 480px;
+  border: 1px solid pink;
 }

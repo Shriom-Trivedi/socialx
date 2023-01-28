@@ -63,7 +63,7 @@ const Post = ({ post }) => {
   const truncate = (string, n) => {
     return string?.length > n ? string.substr(0, n - 1) + '...' : string;
   };
-  
+
   return (
     <div className='post'>
       <div className='postWrapper'>
@@ -161,7 +161,6 @@ const Post = ({ post }) => {
         </div>
         {/* Comment section */}
         {/* <CommentSection /> */}
-        
       </div>
     </div>
   );

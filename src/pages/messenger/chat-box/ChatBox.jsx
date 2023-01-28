@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import ChatBoxDetails from '../chat-box-details/ChatBoxDetails';
 import ChatBoxMessages from '../chat-box-messages/ChatBoxMessages';
-import './chatBox.css'
+import './chatBox.css';
 
 const ChatBox = () => {
+  const [isChatBoxDetails, setChatBoxDetails] = useState(false);
   return (
     <div className='chatBoxContainer'>
       <ChatBoxMessages />
-      <ChatBoxDetails />
+      {isChatBoxDetails && <ChatBoxDetails />}
     </div>
   );
 };

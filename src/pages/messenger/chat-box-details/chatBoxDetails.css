@@ -1,4 +1,7 @@
 .chatBoxDetailsContainer {
-    flex: 2.2;
-    background-color: burlywood;
+  flex: 3.2;
+}
+
+.chatBoxDetailsWrapper {
+  padding: 15px;
 }
