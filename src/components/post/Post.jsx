@@ -33,8 +33,7 @@ const Post = ({ post }) => {
   const [noOfLikes, setNoOfLikes] = useState(likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-  const [truncateLength, setTruncateLength] = useState(45);
-
+  
   const handleLike = async () => {
     let tempLikes = noOfLikes;
     let tempIsLiked = isLiked;
@@ -83,7 +82,7 @@ const Post = ({ post }) => {
               <div>
                 {data?.desc && (
                   <span className='postUserDesc'>
-                    {truncate(data?.desc, truncateLength)}
+                    {truncate(data?.desc, 45)}
                   </span>
                 )}
               </div>
