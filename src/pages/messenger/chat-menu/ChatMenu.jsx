@@ -1,5 +1,6 @@
 import { Search } from '@mui/icons-material';
-import { useRef } from 'react';
+import axios from 'axios';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/Auth/AuthContext';
@@ -25,7 +26,7 @@ const chatMenuData = [
     name: 'Sally Watson',
     timeStamp: 'Yesterday',
     profilePicture: '/assets/person/3.jpeg',
-    msg: 'OMG! you are so funny! xd. Let\'s meet this Saturday!',
+    msg: "OMG! you are so funny! xd. Let's meet this Saturday!",
   },
   {
     id: 4,
@@ -60,7 +61,7 @@ const chatMenuData = [
     name: 'Whaddup Fam',
     timeStamp: '01/12/2022',
     profilePicture: '/assets/person/2.jpeg',
-    msg: 'Are you guys seeing this too, or I\'m hallucinating?',
+    msg: "Are you guys seeing this too, or I'm hallucinating?",
   },
   {
     id: 9,
@@ -75,20 +76,20 @@ const chatMenuData = [
     timeStamp: '30/11/2022',
     profilePicture: '/assets/person/6.jpeg',
     msg: 'what???? You are making your own social media?',
-  }
+  },
 ];
 
-const ChatMenu = () => {
+const truncate = (string, n) => {
+  return string?.length > n ? string.substr(0, n - 1) + '...' : string;
+};
+
+const ChatMenu = ({ conversations, currentUser }) => {
   const { user } = useContext(AuthContext);
   const { name, profilePicture, username, desc } = user._doc;
   const chatSearchRef = useRef();
   const handleFocusIn = () => {
     chatSearchRef.current.style.backgroundColor = 'white';
     chatSearchRef.current.style.border = '0.5px solid #81c6ff';
-  };
-
-  const truncate = (string, n) => {
-    return string?.length > n ? string.substr(0, n - 1) + '...' : string;
   };
 
   const handleFocusOut = () => {
@@ -126,26 +127,53 @@ const ChatMenu = () => {
         </div>
         {/* users friends */}
         <div className='chatFriends'>
-          {chatMenuData.map((chatItem) => (
-            <div key={chatItem.id} className='chatFriendsWrapper'>
-              <img
-                src={chatItem.profilePicture}
-                alt='propic'
-                className='chatFriendImg'
-              />
-              <div className='chatDetailsWrapper'>
-                <div className='chatDetails'>
-                  <p>{chatItem.name}</p>
-                  <span>{chatItem.timeStamp}</span>
-                </div>
-                <div className='chatMenuMsg'>
-                  <p>{truncate(chatItem.msg, 40)}</p>
-                </div>
-              </div>
-            </div>
+          {conversations.map((chatItem) => (
+            <ChatMenuItem currentUser={currentUser} conversation={chatItem} />
           ))}
         </div>
       </div>
+    </div>
+  );
+};
+
+const ChatMenuItem = ({ conversation, currentUser }) => {
+  // currentUser is user from AuthContext.
+  const [friend, setFriend] = useState();
+
+  // UseEffect to fetch friend
+  useEffect(() => {
+    const friendId = conversation?.members?.find(
+      (m) => m !== currentUser?._doc?._id
+    );
+
+    const getUser = async () => {
+      const bodyData = {
+        userId: friendId,
+        conversationId: conversation._id,
+      };
+      try {
+        const res = await axios.get(`/conversation/chatroom`, bodyData);
+        setFriend(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getUser();
+  }, [currentUser, conversation]);
+
+  console.log({ friend });
+  return (
+    <div className='chatFriendsWrapper'>
+      {/* <img src={friend.profilePicture} alt='propic' className='chatFriendImg' />
+      <div className='chatDetailsWrapper'>
+        <div className='chatDetails'>
+          <p>{friend.name}</p>
+          <span>{friend.timeStamp}</span>
+        </div>
+        <div className='chatMenuMsg'>
+          <p>{truncate(friend.msg, 40)}</p>
+        </div>
+      </div> */}
     </div>
   );
 };

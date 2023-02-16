@@ -35,7 +35,6 @@ const Share = ({ user, invalidateTimeline }) => {
       const decodedToken = jwt_decode(user.accessToken);
       if (decodedToken.exp * 1000 < currentDate.getTime()) {
         const data = await refreshCall(user, dispatch);
-        console.log(data);
         config.headers['authorization'] = `Bearer ${data.accessToken}`;
       }
       return config;
