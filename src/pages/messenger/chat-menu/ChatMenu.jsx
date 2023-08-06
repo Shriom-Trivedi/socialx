@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import './chatMenu.css';
+import { format } from 'timeago.js';
 
 const chatMenuData = [
   {
@@ -127,7 +128,7 @@ const ChatMenu = ({ conversations, currentUser }) => {
         </div>
         {/* users friends */}
         <div className='chatFriends'>
-          {conversations.map((chatItem) => (
+          {conversations?.map((chatItem) => (
             <ChatMenuItem currentUser={currentUser} conversation={chatItem} />
           ))}
         </div>
@@ -147,12 +148,10 @@ const ChatMenuItem = ({ conversation, currentUser }) => {
     );
 
     const getUser = async () => {
-      const bodyData = {
-        userId: friendId,
-        conversationId: conversation._id,
-      };
       try {
-        const res = await axios.get(`/conversation/chatroom`, bodyData);
+        const res = await axios.get(
+          `/conversation/chatroom?userId=${friendId}&conversationId=${conversation._id}`
+        );
         setFriend(res.data);
       } catch (err) {
         console.error(err);
@@ -161,19 +160,22 @@ const ChatMenuItem = ({ conversation, currentUser }) => {
     getUser();
   }, [currentUser, conversation]);
 
-  console.log({ friend });
   return (
     <div className='chatFriendsWrapper'>
-      {/* <img src={friend.profilePicture} alt='propic' className='chatFriendImg' />
+      <img
+        src={friend?.profilePicture || `/assets/person/no-profilepic.jpg`}
+        alt='propic'
+        className='chatFriendImg'
+      />
       <div className='chatDetailsWrapper'>
         <div className='chatDetails'>
-          <p>{friend.name}</p>
-          <span>{friend.timeStamp}</span>
+          <p>{friend?.name}</p>
+          <span>{format(friend?.createdAt)}</span>
         </div>
         <div className='chatMenuMsg'>
-          <p>{truncate(friend.msg, 40)}</p>
+          <p>{truncate(friend?.text, 40)}</p>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

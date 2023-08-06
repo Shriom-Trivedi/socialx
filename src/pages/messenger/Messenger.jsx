@@ -8,6 +8,7 @@ import ChatMenu from './chat-menu/ChatMenu';
 import './messenger.css';
 const Messenger = () => {
   const [conversations, setConversations] = useState([]);
+  const [messages, setMessages] = useState([]);
   const { user } = useContext(AuthContext);
   const queryClient = new QueryClient();
 
@@ -29,10 +30,10 @@ const Messenger = () => {
     }
   );
 
-  const { isLoading, isError } = conversationsQuery;
-  
-  if(isLoading) {
-    return <p>Loading...</p>
+  const { isLoading } = conversationsQuery;
+
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
 
   return (
@@ -40,7 +41,7 @@ const Messenger = () => {
       <Topbar />
       <div className='messengerContainer'>
         <ChatMenu conversations={conversations} currentUser={user} />
-        <ChatBox />
+        <ChatBox messages={messages} />
       </div>
     </QueryClientProvider>
   );
