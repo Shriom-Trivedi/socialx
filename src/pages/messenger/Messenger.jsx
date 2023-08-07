@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import Topbar from '../../components/topbar/Topbar';
 import { AuthContext } from '../../context/Auth/AuthContext';
@@ -9,8 +9,10 @@ import './messenger.css';
 const Messenger = () => {
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [currentChat, setCurrentchat] = useState(null);
   const { user } = useContext(AuthContext);
   const queryClient = new QueryClient();
+  const scrollRef = useRef();
 
   // Fetch conversations
   const conversationsQuery = useQuery(
@@ -30,6 +32,22 @@ const Messenger = () => {
     }
   );
 
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get(`/message/${currentChat?._id}`);
+        setMessages(res?.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getMessages();
+  }, [currentChat]);
+
+  useEffect(() => {
+    scrollRef?.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
   const { isLoading } = conversationsQuery;
 
   if (isLoading) {
@@ -40,8 +58,19 @@ const Messenger = () => {
     <QueryClientProvider client={queryClient}>
       <Topbar />
       <div className='messengerContainer'>
-        <ChatMenu conversations={conversations} currentUser={user} />
-        <ChatBox messages={messages} />
+        <ChatMenu
+          conversations={conversations}
+          currentUser={user}
+          setCurrentchat={setCurrentchat}
+        />
+        <ChatBox
+          messages={messages}
+          currentChat={currentChat}
+          updateMessages={(newMessage) =>
+            setMessages([...messages, newMessage])
+          }
+          scrollRef={scrollRef}
+        />
       </div>
     </QueryClientProvider>
   );

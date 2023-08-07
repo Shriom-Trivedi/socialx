@@ -84,7 +84,7 @@ const truncate = (string, n) => {
   return string?.length > n ? string.substr(0, n - 1) + '...' : string;
 };
 
-const ChatMenu = ({ conversations, currentUser }) => {
+const ChatMenu = ({ conversations, currentUser, setCurrentchat }) => {
   const { user } = useContext(AuthContext);
   const { name, profilePicture, username, desc } = user._doc;
   const chatSearchRef = useRef();
@@ -129,7 +129,9 @@ const ChatMenu = ({ conversations, currentUser }) => {
         {/* users friends */}
         <div className='chatFriends'>
           {conversations?.map((chatItem) => (
-            <ChatMenuItem currentUser={currentUser} conversation={chatItem} />
+            <div onClick={() => setCurrentchat(chatItem)}>
+              <ChatMenuItem currentUser={currentUser} conversation={chatItem} />
+            </div>
           ))}
         </div>
       </div>

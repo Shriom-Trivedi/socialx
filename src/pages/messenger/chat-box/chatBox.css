@@ -2,3 +2,11 @@
     flex: 4;
     display: flex;
 }
+
+.selectConversation {
+    color: #a8a8a8;
+    width: 100%;
+    text-align: center;
+    margin-top: 20%;
+    font-size: 1.5rem;
+}

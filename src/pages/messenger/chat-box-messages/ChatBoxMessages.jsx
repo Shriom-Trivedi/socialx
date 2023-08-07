@@ -1,25 +1,24 @@
 import './chatBoxMessages.css';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import { FileCopyOutlined, CollectionsOutlined } from '@mui/icons-material';
-import { useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Tooltip } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import { AuthContext } from '../../../context/Auth/AuthContext';
+import axios from 'axios';
+import { format } from 'timeago.js';
 
-const Message = ({ message, own }) => {
+const Message = ({ msg, own }) => {
   return (
     <div className={own ? 'message own' : 'message'}>
       <div className='messageTop'>
         <img src='/assets/person/2.jpeg' alt='msgImg' className='messageImg' />
-        <p className='messageText'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-          debitis neque voluptate saepe, laudantium non quibusdam porro
-          molestiae aperiam, unde culpa odit.
-        </p>
+        <p className='messageText'>{msg?.text}</p>
       </div>
       <div className='messageBottom'>
-        <span>2 hours ago</span>
+        <span>{format(msg?.createdAt)}</span>
       </div>
     </div>
   );
@@ -91,7 +90,27 @@ const ChatBoxTopbar = () => {
   );
 };
 
-const MessageInputBox = () => {
+const MessageInputBox = ({ currentChat, updateMessages }) => {
+  const textRef = useRef();
+  const { user } = useContext(AuthContext);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const message = {
+      sender: user._doc._id,
+      text: textRef.current.value,
+      conversationId: currentChat._id,
+    };
+
+    try {
+      const res = await axios.post('/message', message);
+      updateMessages(res.data);
+      textRef.current.value = '';
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div className='messageInputBoxWrapper'>
       <input
@@ -100,6 +119,7 @@ const MessageInputBox = () => {
         placeholder='Write your message...'
         name='messageInputBox'
         id='messageInputBox'
+        ref={textRef}
       />
       <div className='messageBtnIcons'>
         <Tooltip title='Emoji' arrow>
@@ -109,7 +129,7 @@ const MessageInputBox = () => {
           <AttachFileIcon fontSize='small' className='messageBtnIconItem' />
         </Tooltip>
         <Tooltip title='Send' arrow>
-          <div className='messageSendBtn'>
+          <div className='messageSendBtn' onClick={handleSubmit}>
             <SendIcon className='messageSendIcon' fontSize='medium' />
           </div>
         </Tooltip>
@@ -118,20 +138,30 @@ const MessageInputBox = () => {
   );
 };
 
-const ChatBoxMessages = () => {
+const ChatBoxMessages = ({
+  messages,
+  currentChat,
+  updateMessages,
+  scrollRef
+}) => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className='chatBoxMessages'>
       <div className='chatBoxMessagesWrapper'>
         <ChatBoxTopbar />
         <div className='messages'>
-          <Message />
-          <Message own={true} />
-          <Message />
-          <Message />
-          <Message />
+          {messages.map((msg) => (
+            <div ref={scrollRef}>
+              <Message msg={msg} own={msg.sender === user._doc._id} />
+            </div>
+          ))}
         </div>
         <div className='MessageInputBox'>
-          <MessageInputBox />
+          <MessageInputBox
+            currentChat={currentChat}
+            updateMessages={updateMessages}
+          />
         </div>
       </div>
     </div>
