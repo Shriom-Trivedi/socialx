@@ -14,7 +14,6 @@ const Topbar = () => {
   const searchRef = useRef();
   const [isSearchActive, setIsSearchActive] = useState(false);
   const navigate = useNavigate();
-  console.log(user);
 
   const handleFocusIn = () => {
     searchRef.current.style.backgroundColor = 'white';
@@ -23,7 +22,7 @@ const Topbar = () => {
   };
 
   const handleFocusOut = () => {
-    searchRef.current.style.backgroundColor = '#e7e7e7';
+    searchRef.current.style.backgroundColor = '#f5f5f5';
     searchRef.current.style.border = '0.5px solid #fff';
     setIsSearchActive(false);
   };
@@ -63,7 +62,7 @@ const Topbar = () => {
               </Badge>
             </Tooltip>
           </div>
-          <div className='topbarIconItem'>
+          <div className='topbarIconItem' onClick={() => navigate('/messenger')}>
             <Tooltip title='Messages' arrow>
               <Badge badgeContent={4} color='primary'>
                 <ChatOutlinedIcon className='topbarIcon' />
@@ -79,10 +78,10 @@ const Topbar = () => {
           </div>
         </div>
         <img
-          src={user?.profilePicture || `/assets/person/no-profilepic.jpg`}
+          src={user?._doc?.profilePicture || `/assets/person/no-profilepic.jpg`}
           alt=''
           className='topbarImg'
-          onClick={() => navigate(`/profile/${user?.username}`)}
+          onClick={() => navigate(`/profile/${user?._doc.username}`)}
         />
       </div>
     </div>

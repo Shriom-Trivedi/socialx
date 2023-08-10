@@ -14,6 +14,7 @@ import axios from 'axios';
 import { format } from 'timeago.js';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import CommentSection from '../commentSection/CommentSection';
 
 const Post = ({ post }) => {
   const { user: currentUser } = useContext(AuthContext);
@@ -32,8 +33,7 @@ const Post = ({ post }) => {
   const [noOfLikes, setNoOfLikes] = useState(likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-  const [truncateLength, setTruncateLength] = useState(45);
-
+  
   const handleLike = async () => {
     let tempLikes = noOfLikes;
     let tempIsLiked = isLiked;
@@ -41,7 +41,7 @@ const Post = ({ post }) => {
       setNoOfLikes(isLiked ? noOfLikes - 1 : noOfLikes + 1);
       setIsLiked(!isLiked);
       const data = {
-        userId: currentUser._id,
+        userId: currentUser._doc._id,
       };
       await axios.put(`/posts/${post._id}/like`, data);
     } catch (error) {
@@ -56,20 +56,12 @@ const Post = ({ post }) => {
 
   // Checks if the user has liked the post or not. If the user has liked the post, then the icon will be filled. If the user has not liked the post, then the icon will be empty.
   useEffect(() => {
-    setIsLiked(likes.includes(currentUser._id));
-  }, [likes, currentUser._id]);
+    setIsLiked(likes.includes(currentUser._doc._id));
+  }, [likes, currentUser._doc._id]);
 
   const truncate = (string, n) => {
     return string?.length > n ? string.substr(0, n - 1) + '...' : string;
   };
-
-  // useEffect(() => {
-  //   if (window.innerWidth < 918) {
-  //     setTruncateLength(45);
-  //   } else {
-  //     setTruncateLength(70);
-  //   }
-  // },[window.innerWidth]);
 
   return (
     <div className='post'>
@@ -90,7 +82,7 @@ const Post = ({ post }) => {
               <div>
                 {data?.desc && (
                   <span className='postUserDesc'>
-                    {truncate(data?.desc, truncateLength)}
+                    {truncate(data?.desc, 45)}
                   </span>
                 )}
               </div>
@@ -166,6 +158,8 @@ const Post = ({ post }) => {
             </Tooltip>
           </div>
         </div>
+        {/* Comment section */}
+        {/* <CommentSection /> */}
       </div>
     </div>
   );

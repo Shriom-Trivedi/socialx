@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.chatMenuContainer {
+  flex: 1.4;
+}
+
+.chatMenuWrapper {
+  padding: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatUserProfile {
+  display: flex;
+  padding: 10px 8px;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.chatUserProfile::after {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 0.8px;
+  background-color: #edf0f5;
+  bottom: 0;
+  left: -20px;
+}
+
+.chatMenuImg img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.chatSearchBar {
+  width: 100%;
+  height: 100%;
+  margin-left: 8px;
+}
+
+.chatSearchBarWrapper {
+  height: 100%;
+  border-radius: 5px;
+  background-color: #f0f3f6;
+  display: flex;
+  align-items: center;
+}
+
+.chatSearchBarWrapper input {
+  height: 100%;
+  width: 100%;
+  margin-left: 8px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.chatSearchIcon {
+  font-size: 20px !important;
+  margin-right: 10px;
+  color: #788195;
+}
+
+.chatSearchBarWrapper:hover {
+  border: 0.5px solid #81c6ff !important;
+}
+
+.chatFriends {
+  margin-top: 15px;
+  overflow-y: scroll;
+}
+
+.chatFriendsWrapper {
+  display: flex;
+  padding: 16px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chatFriendsWrapper:hover {
+  background-color: #eeeeee;
+}
+
+.chatFriendImg {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.chatDetailsWrapper {
+  width: 100%;
+  margin-left: 12px;
+}
+
+.chatDetails {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chatDetails span {
+  font-size: 0.7rem;
+  color: var(--text-gray);
+}
+
+.chatMenuMsg {
+  width: 100%;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-dark);
+  white-space: nowrap;
+}

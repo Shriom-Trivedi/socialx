@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 /* Utility classes */
 .logo {
   /* font-family: var(--logo-font); */
-  font-family: "Paytone One", sans-serif;
+  font-family: 'Paytone One', sans-serif;
   font-size: 38px;
   margin-left: 40px;
   cursor: pointer;
@@ -14,7 +14,7 @@
 }
 
 .topbarContainer {
-  height: 70px;
+  height: var(--topbar-height);
   width: 100%;
   background-color: var(--primary-color);
   display: flex;
@@ -45,7 +45,7 @@
   width: 90%;
   height: 35px;
   padding: 5px;
-  background-color: var(--gray);
+  background-color: var(--gray-light);
   display: flex;
   align-items: center;
   border-radius: 5px;

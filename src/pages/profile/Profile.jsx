@@ -25,15 +25,15 @@ const Profile = () => {
 
   // Check if user is following
   useEffect(() => {
-    setIsFollowing(currentUser?.following.includes(data?._id));
+    setIsFollowing(currentUser?._doc?.following.includes(data?._id));
     setIsEditProfile(currentUser?._id === data?._id);
-  }, [currentUser?.following, data?._id]);
+  }, [currentUser?._doc?.following, data?._id]);
 
   // console.log([isFollowing, currentUser._id, data._id]);
 
   const handleFollow = async () => {
     const reqData = {
-      userId: currentUser?._id,
+      userId: currentUser?._doc._id,
     };
     const temp = isFollowing;
     try {

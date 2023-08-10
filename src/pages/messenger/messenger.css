@@ -1,0 +1,4 @@
+.messengerContainer {
+  display: flex;
+  height: calc(100vh - var(--topbar-height));
+}

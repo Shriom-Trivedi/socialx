@@ -70,8 +70,8 @@ const Sidebar = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const friendsQuery = useQuery(['user-friends', user._id], async () => {
-    const data = await axios.get(`/users/friends/${user._id}`);
+  const friendsQuery = useQuery(['user-friends', user._doc._id], async () => {
+    const data = await axios.get(`/users/friends/${user._doc._id}`);
     return data.data;
   });
   const { isLoading, isError, data } = friendsQuery;
