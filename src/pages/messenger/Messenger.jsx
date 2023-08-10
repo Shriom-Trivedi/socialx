@@ -6,13 +6,40 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import ChatBox from './chat-box/ChatBox';
 import ChatMenu from './chat-menu/ChatMenu';
 import './messenger.css';
+import { io } from 'socket.io-client';
+
 const Messenger = () => {
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const [currentChat, setCurrentchat] = useState(null);
+  const [msgsFromSocket, setMsgsFromSocket] = useState(null);
   const { user } = useContext(AuthContext);
   const queryClient = new QueryClient();
   const scrollRef = useRef();
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io('ws://localhost:8900');
+    socket.current.on('getMessage', (data) => {
+      setMsgsFromSocket({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
+
+  // socket operations
+  useEffect(() => {
+    socket?.current.emit('addUser', user._doc._id);
+    socket?.current.on('getUsers', (users) => {});
+  }, [user._doc]);
+
+  useEffect(() => {
+    msgsFromSocket &&
+      currentChat?.members.includes(msgsFromSocket.sender) &&
+      setMessages((prevMsgs) => [...prevMsgs, msgsFromSocket]);
+  }, [msgsFromSocket, currentChat]);
 
   // Fetch conversations
   const conversationsQuery = useQuery(
@@ -69,6 +96,7 @@ const Messenger = () => {
           updateMessages={(newMessage) =>
             setMessages([...messages, newMessage])
           }
+          socket={socket}
           scrollRef={scrollRef}
         />
       </div>

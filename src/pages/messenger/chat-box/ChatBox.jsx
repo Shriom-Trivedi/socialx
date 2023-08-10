@@ -3,7 +3,13 @@ import ChatBoxDetails from '../chat-box-details/ChatBoxDetails';
 import ChatBoxMessages from '../chat-box-messages/ChatBoxMessages';
 import './chatBox.css';
 
-const ChatBox = ({ messages, currentChat, updateMessages, scrollRef }) => {
+const ChatBox = ({
+  messages,
+  currentChat,
+  updateMessages,
+  socket,
+  scrollRef,
+}) => {
   const [isChatBoxDetails, setChatBoxDetails] = useState(false);
 
   return (
@@ -15,6 +21,7 @@ const ChatBox = ({ messages, currentChat, updateMessages, scrollRef }) => {
             currentChat={currentChat}
             updateMessages={updateMessages}
             scrollRef={scrollRef}
+            socket={socket}
           />
           {isChatBoxDetails && <ChatBoxDetails />}
         </>

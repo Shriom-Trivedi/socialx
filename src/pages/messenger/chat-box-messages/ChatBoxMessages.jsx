@@ -10,11 +10,14 @@ import { AuthContext } from '../../../context/Auth/AuthContext';
 import axios from 'axios';
 import { format } from 'timeago.js';
 
-const Message = ({ msg, own }) => {
+const Message = ({ msg, own, friend, user }) => {
+  const userImg = own
+    ? user?._doc?.profilePicture
+    : friend?.profilePicture || '/assets/person/no-profilepic.jpg';
   return (
     <div className={own ? 'message own' : 'message'}>
       <div className='messageTop'>
-        <img src='/assets/person/2.jpeg' alt='msgImg' className='messageImg' />
+        <img src={userImg} alt='msgImg' className='messageImg' />
         <p className='messageText'>{msg?.text}</p>
       </div>
       <div className='messageBottom'>
@@ -24,7 +27,7 @@ const Message = ({ msg, own }) => {
   );
 };
 
-const ChatBoxTopbar = () => {
+const ChatBoxTopbar = ({ user }) => {
   const [activeTab, setActiveTab] = useState('messages');
 
   const navItems = [
@@ -67,9 +70,12 @@ const ChatBoxTopbar = () => {
     <div className='chatBoxTopbar'>
       <div className='friendInfo'>
         <div className='friendImg'>
-          <img src='/assets/person/2.jpeg' alt='' />
+          <img
+            src={user?.profilePicture || '/assets/person/no-profilepic.jpg'}
+            alt='friendImg'
+          />
         </div>
-        <div className='friendName'>John Doe</div>
+        <div className='friendName'>{user?.name}</div>
       </div>
       <ul className='messages_topbarIcons'>
         {navItems.map((item) => {
@@ -90,7 +96,7 @@ const ChatBoxTopbar = () => {
   );
 };
 
-const MessageInputBox = ({ currentChat, updateMessages }) => {
+const MessageInputBox = ({ currentChat, updateMessages, socket }) => {
   const textRef = useRef();
   const { user } = useContext(AuthContext);
 
@@ -102,6 +108,14 @@ const MessageInputBox = ({ currentChat, updateMessages }) => {
       text: textRef.current.value,
       conversationId: currentChat._id,
     };
+
+    const receiverId = currentChat.members.find((m) => m !== user._doc._id);
+
+    socket?.current.emit('sendMessage', {
+      senderId: user._doc._id,
+      receiverId: receiverId,
+      text: textRef?.current?.value,
+    });
 
     try {
       const res = await axios.post('/message', message);
@@ -142,18 +156,33 @@ const ChatBoxMessages = ({
   messages,
   currentChat,
   updateMessages,
-  scrollRef
+  scrollRef,
+  socket,
 }) => {
   const { user } = useContext(AuthContext);
+  const [chatuser, setChatUser] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const res = await axios.get(`/users?userId=${currentChat.members[1]}`);
+      setChatUser(res.data);
+    };
+    getUser();
+  }, [currentChat?.members]);
 
   return (
     <div className='chatBoxMessages'>
       <div className='chatBoxMessagesWrapper'>
-        <ChatBoxTopbar />
+        <ChatBoxTopbar user={chatuser} />
         <div className='messages'>
           {messages.map((msg) => (
             <div ref={scrollRef}>
-              <Message msg={msg} own={msg.sender === user._doc._id} />
+              <Message
+                msg={msg}
+                own={msg.sender === user._doc._id}
+                friend={chatuser}
+                user={user}
+              />
             </div>
           ))}
         </div>
@@ -161,6 +190,7 @@ const ChatBoxMessages = ({
           <MessageInputBox
             currentChat={currentChat}
             updateMessages={updateMessages}
+            socket={socket}
           />
         </div>
       </div>
