@@ -1,4 +1,3 @@
-import { MoreVert } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React, { useContext, useEffect, useRef } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -9,17 +8,19 @@ import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import './post.css';
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
 import axios from 'axios';
 import { format } from 'timeago.js';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import CommentSection from '../commentSection/CommentSection';
+import PostMenuItem from './PostMenuItem';
 
-const Post = ({ post }) => {
+const Post = ({ post, updateTimeLinePosts }) => {
   const { user: currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { userId, comment, createdAt, desc, likes, img } = post;
+
+  const { userId, comment, createdAt, desc, likes, img, _id } = post;
   const userQuery = useQuery(['user-data', userId], async () => {
     const userData = await axios.get(`/users?userId=${userId}`);
     return userData.data;
@@ -33,7 +34,7 @@ const Post = ({ post }) => {
   const [noOfLikes, setNoOfLikes] = useState(likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-  
+
   const handleLike = async () => {
     let tempLikes = noOfLikes;
     let tempIsLiked = isLiked;
@@ -88,9 +89,12 @@ const Post = ({ post }) => {
               </div>
             </div>
           </div>
-          <Tooltip title='More' arrow>
+          <Tooltip title='More' arrow placement='top'>
             <div className='postTopRight'>
-              <MoreVert />
+              <PostMenuItem
+                postId={_id}
+                updateTimeLinePosts={updateTimeLinePosts}
+              />
             </div>
           </Tooltip>
         </div>

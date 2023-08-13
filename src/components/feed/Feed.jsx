@@ -1,5 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+  useQueryClient,
+} from 'react-query';
 import Post from '../post/Post';
 import Share from '../share/Share';
 import axios from 'axios';
@@ -12,7 +17,7 @@ import SkeletonLoader from '../../ui-shared/common/loader/Skeleton';
 const Feed = ({ username }) => {
   const { user } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const postsQuery = useQuery(
     ['timeline-posts', username],
     async () => {
@@ -32,7 +37,7 @@ const Feed = ({ username }) => {
   const { isLoading, isError, data } = postsQuery;
 
   const isShareOpen =
-    window.location.pathname === `/profile/${user._doc.username}` ||
+    window.location.pathname === `/profile/${user?._doc.username}` ||
     window.location.pathname === '/';
 
   return (
@@ -58,7 +63,15 @@ const Feed = ({ username }) => {
           {isLoading ? (
             <SkeletonLoader />
           ) : (
-            posts?.map((post) => <Post key={post._id} post={post} />)
+            posts?.map((post) => (
+              <Post
+                key={post._id}
+                post={post}
+                updateTimeLinePosts={() =>
+                  queryClient.refetchQueries(['timeline-posts'])
+                }
+              />
+            ))
           )}
 
           {/* {posts?.map((post) => (

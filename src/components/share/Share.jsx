@@ -68,12 +68,13 @@ const Share = ({ user, invalidateTimeline }) => {
       }
     }
     try {
-      newPost.desc &&
+      // (newPost.desc || newPost.file) &&
         (await axiosJwt.post('/posts', newPost, {
           headers: { authorization: `Bearer ${user.accessToken}` },
         }));
       invalidateTimeline();
-      // window.location.reload();
+      descRef.current.value = '';
+      // setFile(null);
     } catch (error) {
       console.log(error);
     }

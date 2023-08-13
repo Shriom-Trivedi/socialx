@@ -128,6 +128,11 @@
   margin: 0 10px;
 }
 
+.onHoverDelete:hover {
+  background-color: #ffeded !important;
+  transition: ease-in-out;
+}
+
 @keyframes likeCounterAnimation {
   0% {
     transform: translateY(2rem);
