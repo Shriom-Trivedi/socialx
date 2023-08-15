@@ -162,13 +162,15 @@ const ChatBoxMessages = ({
   const { user } = useContext(AuthContext);
   const [chatuser, setChatUser] = useState(null);
 
+  const friendId = currentChat?.members.find((mid) => mid !== user?._doc._id);
+
   useEffect(() => {
     const getUser = async () => {
-      const res = await axios.get(`/users?userId=${currentChat.members[1]}`);
+      const res = await axios.get(`/users?userId=${friendId}`);
       setChatUser(res.data);
     };
     getUser();
-  }, [currentChat?.members]);
+  }, [friendId]);
 
   return (
     <div className='chatBoxMessages'>
@@ -179,7 +181,7 @@ const ChatBoxMessages = ({
             <div ref={scrollRef}>
               <Message
                 msg={msg}
-                own={msg.sender === user._doc._id}
+                own={msg.sender === user?._doc._id}
                 friend={chatuser}
                 user={user}
               />
