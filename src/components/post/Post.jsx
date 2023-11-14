@@ -13,8 +13,8 @@ import axios from 'axios';
 import { format } from 'timeago.js';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import CommentSection from '../commentSection/CommentSection';
 import PostMenuItem from './PostMenuItem';
+import CommentSectionContainer from '../commentSection/CommentSectionContainer';
 
 const Post = ({ post, updateTimeLinePosts }) => {
   const { user: currentUser } = useContext(AuthContext);
@@ -34,6 +34,7 @@ const Post = ({ post, updateTimeLinePosts }) => {
   const [noOfLikes, setNoOfLikes] = useState(likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [isCommentSection, setIsCommentSection] = useState(false);
 
   const handleLike = async () => {
     let tempLikes = noOfLikes;
@@ -128,7 +129,10 @@ const Post = ({ post, updateTimeLinePosts }) => {
               </div>
             </Tooltip>
             <Tooltip title='Comment' arrow>
-              <div className='postBottomLeftIcons postBottomComment'>
+              <div
+                className='postBottomLeftIcons postBottomComment'
+                onClick={() => setIsCommentSection(!isCommentSection)}
+              >
                 <ChatOutlinedIcon className='postBottomLeftIcon comment' />
                 <span className='postCommentCounter'>{comment}</span>
               </div>
@@ -163,7 +167,7 @@ const Post = ({ post, updateTimeLinePosts }) => {
           </div>
         </div>
         {/* Comment section */}
-        {/* <CommentSection /> */}
+        {isCommentSection === true ? <CommentSectionContainer /> : null}
       </div>
     </div>
   );

@@ -1,0 +1,28 @@
+.commentSectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.commentSectionContainer div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.commentInput {
+  width: 100%;
+  padding: 0.8rem 0.5rem;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 1px solid #dadada;
+
+  transition: all 0.1s ease-in;
+}
+
+.commentInput:hover {
+  border-color: #707070;
+}
